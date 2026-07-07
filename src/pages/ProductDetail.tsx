@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
 import { getProduct, type ShopifyProduct, type ShopifyVariantEdge, type ShopifySelectedOption, type ShopifyImageEdge } from '../lib/shopify';
+import { formatPrice } from '../lib/utils';
 
 const ProductDetail = () => {
   const { id } = useParams();
@@ -36,6 +37,7 @@ const ProductDetail = () => {
   // Derived data (Shopify or Local Fallback)
   const productName = shopifyProduct?.title || (isBrown ? 'Snuggle Cami Set - Brown' : 'Snuggle Cami Set - Cream');
   const productPrice = shopifyProduct?.priceRange?.minVariantPrice?.amount || '2499.00';
+  const productCurrency = shopifyProduct?.priceRange?.minVariantPrice?.currencyCode || 'INR';
 
   // Find matching variant
   const hasVariants = shopifyProduct?.variants?.edges?.some((edge: ShopifyVariantEdge) => 
@@ -149,7 +151,7 @@ const ProductDetail = () => {
                 <Share2 className="w-5 h-5" />
               </button>
             </div>
-            <p className="text-xl font-medium">${productPrice}</p>
+            <p className="text-xl font-medium">{formatPrice(productPrice, productCurrency)}</p>
           </div>
 
           {/* Controls */}

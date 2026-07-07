@@ -1,0 +1,6 @@
+{
+  "enabledPlugins": {
+    "shopify@claude-plugins-official": true,
+    "shopify-ai-toolkit@claude-plugins-official": true
+  }
+}

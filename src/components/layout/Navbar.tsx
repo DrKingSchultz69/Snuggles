@@ -2,6 +2,7 @@ import { Search, ShoppingBag, User } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useCart } from '../../context/CartContext';
 import { useSearch } from '../../context/SearchContext';
+import { formatPrice } from '../../lib/utils';
 
 const Navbar = () => {
   const { items, subtotal } = useCart();
@@ -68,7 +69,7 @@ const Navbar = () => {
                     <div key={item.id} className="flex gap-4">
                       <div className="w-16 h-20 bg-muted shrink-0">
                         <img 
-                          src={`https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=${encodeURIComponent(item.img)}&image_size=portrait_4_3`} 
+                          src={item.img}
                           alt={item.name} 
                           className="w-full h-full object-cover"
                         />
@@ -76,7 +77,7 @@ const Navbar = () => {
                       <div>
                         <p className="text-sm font-medium">{item.name}</p>
                         <p className="text-xs text-muted-foreground">{item.color} / {item.size} / Qty: {item.quantity}</p>
-                        <p className="text-xs font-medium mt-1">${item.price * item.quantity}</p>
+                        <p className="text-xs font-medium mt-1">{formatPrice(item.price * item.quantity)}</p>
                       </div>
                     </div>
                   ))
@@ -85,7 +86,7 @@ const Navbar = () => {
               <div className="p-4 border-t border-muted bg-muted/10">
                 <div className="flex justify-between text-sm mb-4">
                   <span className="text-muted-foreground">Subtotal</span>
-                  <span className="font-medium">${subtotal}</span>
+                  <span className="font-medium">{formatPrice(subtotal)}</span>
                 </div>
                 <Link to="/cart" className="block w-full bg-black text-white text-center py-3 uppercase text-xs tracking-widest hover:bg-black/90 transition-colors">
                   View Bag & Checkout

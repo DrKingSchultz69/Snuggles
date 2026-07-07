@@ -2,6 +2,7 @@ import { ChevronDown, SlidersHorizontal, Loader2 } from 'lucide-react';
 import { Link, useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { getProducts, type ShopifyProduct } from '../lib/shopify';
+import { formatPrice } from '../lib/utils';
 
 const ProductListing = () => {
   const { category } = useParams();
@@ -25,7 +26,7 @@ const ProductListing = () => {
       id: 'cream-cami', 
       handle: 'cream-cami',
       title: 'Snuggle Cami Set - Cream', 
-      priceRange: { minVariantPrice: { amount: '299', currencyCode: 'USD' } }, 
+      priceRange: { minVariantPrice: { amount: '299', currencyCode: 'INR' } }, 
       images: { edges: [{ node: { url: 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=minimal%20fashion%20cream%20cami%20set%20lounge%20studio&image_size=portrait_4_3', altText: '' } }] },
       description: '',
       variants: { edges: [] }
@@ -34,7 +35,7 @@ const ProductListing = () => {
       id: 'brown-cami', 
       handle: 'brown-cami',
       title: 'Snuggle Cami Set - Brown', 
-      priceRange: { minVariantPrice: { amount: '299', currencyCode: 'USD' } }, 
+      priceRange: { minVariantPrice: { amount: '299', currencyCode: 'INR' } }, 
       images: { edges: [{ node: { url: 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=minimal%20fashion%20brown%20cami%20set%20lounge%20studio&image_size=portrait_4_3', altText: '' } }] },
       description: '',
       variants: { edges: [] }
@@ -69,6 +70,7 @@ const ProductListing = () => {
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-4 gap-y-12">
         {displayProducts.map((product) => {
           const price = product.priceRange?.minVariantPrice?.amount || '299';
+          const currency = product.priceRange?.minVariantPrice?.currencyCode || 'INR';
           const imgUrl = product.images?.edges?.[0]?.node?.url || '';
           
           return (
@@ -86,7 +88,7 @@ const ProductListing = () => {
                   <h3 className="text-sm font-medium uppercase tracking-wide mb-1 group-hover:text-muted-foreground transition-colors">{product.title}</h3>
                   <p className="text-xs text-muted-foreground">The Collection</p>
                 </div>
-                <p className="text-sm font-medium">${price}</p>
+                <p className="text-sm font-medium">{formatPrice(price, currency)}</p>
               </div>
             </Link>
           );

@@ -1,4 +1,5 @@
 import { createContext, useContext, useState, ReactNode, useEffect } from 'react';
+import { getProducts } from '../lib/shopify';
 
 export interface Product {
   id: string;
@@ -23,37 +24,21 @@ interface SearchContextType {
 
 const SearchContext = createContext<SearchContextType | undefined>(undefined);
 
-// Mock products for local search
-const MOCK_PRODUCTS: Product[] = [
-  { 
-    id: '1', 
-    name: 'Snuggle Cami Set - Cream', 
-    price: 299, 
-    img: 'minimal fashion cream cami set lounge studio', 
-    handle: 'cream-cami' 
-  },
-  { 
-    id: '2', 
-    name: 'Snuggle Cami Set - Brown', 
-    price: 299, 
-    img: 'minimal fashion brown cami set lounge studio', 
-    handle: 'brown-cami' 
-  },
-  {
-    id: '3',
-    name: 'Snuggle Lounge Pants - Grey',
-    price: 199,
-    img: 'minimal fashion grey lounge pants studio',
-    handle: 'grey-lounge-pants'
-  },
-  {
-    id: '4',
-    name: 'Snuggle Robe - White',
-    price: 349,
-    img: 'minimal fashion white robe studio',
-    handle: 'white-robe'
-  }
-];
+// Product catalog fetched from Shopify, cached for the session
+let catalogCache: Product[] | null = null;
+
+async function loadCatalog(): Promise<Product[]> {
+  if (catalogCache) return catalogCache;
+  const data = await getProducts(50);
+  catalogCache = (data || []).map(p => ({
+    id: p.id,
+    name: p.title,
+    price: parseFloat(p.priceRange?.minVariantPrice?.amount || '0'),
+    img: p.images?.edges?.[0]?.node?.url || '',
+    handle: p.handle,
+  }));
+  return catalogCache;
+}
 
 export const SearchProvider = ({ children }: { children: ReactNode }) => {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
@@ -81,15 +66,11 @@ export const SearchProvider = ({ children }: { children: ReactNode }) => {
       setIsSearching(true);
       
       try {
-        // Local mock search first
-        const localResults = MOCK_PRODUCTS.filter(p => 
+        const catalog = await loadCatalog();
+        const results = catalog.filter(p =>
           p.name.toLowerCase().includes(searchQuery.toLowerCase())
         );
-
-        // Optional: Call Shopify API here if needed
-        // const shopifyResults = await searchShopify(searchQuery);
-        
-        setSearchResults(localResults);
+        setSearchResults(results);
       } catch (error) {
         console.error('Search error:', error);
       } finally {

@@ -2,6 +2,7 @@ import { Minus, Plus, X } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
 import { createCheckout } from '../lib/shopify';
+import { formatPrice } from '../lib/utils';
 
 const Cart = () => {
   const navigate = useNavigate();
@@ -41,7 +42,7 @@ const Cart = () => {
           <div key={item.id} className="flex gap-6 py-6 border-b border-muted">
             <div className="w-24 h-32 bg-muted shrink-0">
                <img 
-                src={`https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=${encodeURIComponent(item.img)}&image_size=portrait_4_3`} 
+                src={item.img}
                 alt={item.name} 
                 className="w-full h-full object-cover"
               />
@@ -78,7 +79,7 @@ const Cart = () => {
                     <Plus className="w-3 h-3" />
                   </button>
                 </div>
-                <p className="font-medium">${item.price * item.quantity}</p>
+                <p className="font-medium">{formatPrice(item.price * item.quantity)}</p>
               </div>
             </div>
           </div>
@@ -88,7 +89,7 @@ const Cart = () => {
       <div className="mt-12 space-y-4 max-w-sm ml-auto">
         <div className="flex justify-between text-sm">
           <span className="text-muted-foreground">Subtotal</span>
-          <span>${subtotal}</span>
+          <span>{formatPrice(subtotal)}</span>
         </div>
         <div className="flex justify-between text-sm">
           <span className="text-muted-foreground">Shipping</span>
@@ -96,7 +97,7 @@ const Cart = () => {
         </div>
         <div className="flex justify-between text-lg font-medium pt-4 border-t border-muted">
           <span>Total</span>
-          <span>${subtotal}</span>
+          <span>{formatPrice(subtotal)}</span>
         </div>
         <button 
           onClick={handleCheckout}

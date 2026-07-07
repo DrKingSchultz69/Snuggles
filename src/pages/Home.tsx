@@ -1,7 +1,18 @@
 import { ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { getProducts, type ShopifyProduct } from '../lib/shopify';
+import { formatPrice } from '../lib/utils';
 
 const Home = () => {
+  const [products, setProducts] = useState<ShopifyProduct[]>([]);
+
+  useEffect(() => {
+    getProducts(4).then(data => {
+      if (data) setProducts(data);
+    });
+  }, []);
+
   return (
     <div className="flex flex-col gap-0">
       {/* Hero Section */}
@@ -133,23 +144,20 @@ const Home = () => {
         </div>
         
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-12 max-w-4xl mx-auto">
-          {[
-            { name: 'Snuggle Cami Set - Cream', price: '$299', img: 'minimal fashion cream cami set lounge studio', link: '/product/cream-cami' },
-            { name: 'Snuggle Cami Set - Brown', price: '$299', img: 'minimal fashion brown cami set lounge studio', link: '/product/brown-cami' }
-          ].map((product, i) => (
-            <Link key={i} to={product.link} className="group cursor-pointer block">
+          {products.slice(0, 2).map((product) => (
+            <Link key={product.id} to={`/product/${product.handle}`} className="group cursor-pointer block">
               <div className="aspect-[3/4] overflow-hidden bg-muted mb-4 relative">
-                <img 
-                  src={`https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=${encodeURIComponent(product.img)}&image_size=portrait_4_3`} 
-                  alt={product.name} 
+                <img
+                  src={product.images?.edges?.[0]?.node?.url || ''}
+                  alt={product.title}
                   className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                 />
                 <button className="absolute bottom-0 left-0 w-full bg-black text-white py-3 uppercase text-xs tracking-widest translate-y-full group-hover:translate-y-0 transition-transform duration-300">
                   Shop Now
                 </button>
               </div>
-              <h3 className="text-sm font-serif uppercase tracking-wide mb-1">{product.name}</h3>
-              <p className="text-sm text-muted-foreground">{product.price}</p>
+              <h3 className="text-sm font-serif uppercase tracking-wide mb-1">{product.title}</h3>
+              <p className="text-sm text-muted-foreground">{formatPrice(product.priceRange?.minVariantPrice?.amount || '0', product.priceRange?.minVariantPrice?.currencyCode || 'INR')}</p>
             </Link>
           ))}
         </div>

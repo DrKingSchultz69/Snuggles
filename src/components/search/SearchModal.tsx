@@ -2,6 +2,7 @@ import { useEffect, useRef } from 'react';
 import { Search, X, Clock, ArrowRight } from 'lucide-react';
 import { useSearch } from '../../context/SearchContext';
 import { Link } from 'react-router-dom';
+import { formatPrice } from '../../lib/utils';
 
 const SearchModal = () => {
   const { 
@@ -131,14 +132,14 @@ const SearchModal = () => {
                     >
                       <div className="w-16 h-20 bg-muted shrink-0 overflow-hidden">
                         <img 
-                          src={`https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=${encodeURIComponent(product.img)}&image_size=portrait_4_3`} 
+                          src={product.img}
                           alt={product.name}
                           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                         />
                       </div>
                       <div className="flex flex-col justify-center">
                         <h4 className="text-sm font-medium group-hover:underline decoration-1 underline-offset-4">{product.name}</h4>
-                        <p className="text-sm text-muted-foreground mt-1">${product.price}</p>
+                        <p className="text-sm text-muted-foreground mt-1">{formatPrice(product.price)}</p>
                       </div>
                     </Link>
                   ))}

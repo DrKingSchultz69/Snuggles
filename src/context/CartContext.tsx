@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, ReactNode } from 'react';
+import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 
 export interface CartItem {
   id: number;
@@ -22,10 +22,18 @@ interface CartContextType {
 const CartContext = createContext<CartContextType | undefined>(undefined);
 
 export const CartProvider = ({ children }: { children: ReactNode }) => {
-  const [items, setItems] = useState<CartItem[]>([
-    { id: 1, variantId: 'mock-variant-1', name: 'Snuggle Cami Set', size: 'M', color: 'Cream', price: 299, img: 'minimal fashion cream cami set lounge studio', quantity: 1 },
-    { id: 2, variantId: 'mock-variant-2', name: 'Snuggle Cami Set', size: 'S', color: 'Brown', price: 299, img: 'minimal fashion brown cami set lounge studio', quantity: 1 }
-  ]);
+  const [items, setItems] = useState<CartItem[]>(() => {
+    try {
+      const saved = localStorage.getItem('cart');
+      return saved ? JSON.parse(saved) : [];
+    } catch {
+      return [];
+    }
+  });
+
+  useEffect(() => {
+    localStorage.setItem('cart', JSON.stringify(items));
+  }, [items]);
 
   const addToCart = (newItem: Omit<CartItem, 'id'>) => {
     setItems(prev => {
