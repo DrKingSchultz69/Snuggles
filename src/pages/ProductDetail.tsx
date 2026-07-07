@@ -161,12 +161,12 @@ const ProductDetail = () => {
               <span className="text-sm uppercase tracking-wide">Color: {productColor}</span>
               <div className="flex gap-4">
                 <button 
-                  onClick={() => navigate('/product/cream-cami')}
+                  onClick={() => navigate('/product/cami-set-cream')}
                   className={`w-8 h-8 rounded-full bg-[#F5F5F5] border-2 transition-all ${!isBrown ? 'border-black ring-1 ring-black ring-offset-2' : 'border-transparent hover:border-muted-foreground'}`}
                   aria-label="Cream"
                 />
                 <button 
-                  onClick={() => navigate('/product/brown-cami')}
+                  onClick={() => navigate('/product/cami-set-brown')}
                   className={`w-8 h-8 rounded-full bg-[#8B4513] border-2 transition-all ${isBrown ? 'border-black ring-1 ring-black ring-offset-2' : 'border-transparent hover:border-muted-foreground'}`}
                   aria-label="Brown"
                 />

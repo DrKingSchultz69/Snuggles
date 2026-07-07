@@ -22,20 +22,20 @@ const ProductListing = () => {
   }, []);
 
   const localFallback = [
-    { 
-      id: 'cream-cami', 
-      handle: 'cream-cami',
-      title: 'Snuggle Cami Set - Cream', 
-      priceRange: { minVariantPrice: { amount: '299', currencyCode: 'INR' } }, 
+    {
+      id: 'cami-set-cream',
+      handle: 'cami-set-cream',
+      title: 'Cami Set Cream',
+      priceRange: { minVariantPrice: { amount: '749.95', currencyCode: 'INR' } },
       images: { edges: [{ node: { url: 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=minimal%20fashion%20cream%20cami%20set%20lounge%20studio&image_size=portrait_4_3', altText: '' } }] },
       description: '',
       variants: { edges: [] }
     },
-    { 
-      id: 'brown-cami', 
-      handle: 'brown-cami',
-      title: 'Snuggle Cami Set - Brown', 
-      priceRange: { minVariantPrice: { amount: '299', currencyCode: 'INR' } }, 
+    {
+      id: 'cami-set-brown',
+      handle: 'cami-set-brown',
+      title: 'Cami Set Brown',
+      priceRange: { minVariantPrice: { amount: '1200', currencyCode: 'INR' } },
       images: { edges: [{ node: { url: 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=minimal%20fashion%20brown%20cami%20set%20lounge%20studio&image_size=portrait_4_3', altText: '' } }] },
       description: '',
       variants: { edges: [] }

@@ -63,8 +63,8 @@ const Home = () => {
       {/* Categories Grid */}
       <section className="grid grid-cols-1 md:grid-cols-2 h-[80vh] w-full">
         {[
-          { title: 'Shop Cream', link: '/product/cream-cami', img: 'minimal fashion woman cream cami set studio' },
-          { title: 'Shop Brown', link: '/product/brown-cami', img: 'minimal fashion woman brown cami set studio' }
+          { title: 'Shop Cream', link: '/product/cami-set-cream', img: 'minimal fashion woman cream cami set studio' },
+          { title: 'Shop Brown', link: '/product/cami-set-brown', img: 'minimal fashion woman brown cami set studio' }
         ].map((cat) => (
           <Link 
             key={cat.title} 

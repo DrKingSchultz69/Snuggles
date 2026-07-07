@@ -19,8 +19,8 @@ const Footer = () => {
             <h4 className="font-medium text-sm uppercase tracking-wider">Shop</h4>
             <ul className="space-y-2 text-sm text-muted-foreground">
               <li><Link to="/category/sets" className="hover:text-black transition-colors">Shop All</Link></li>
-              <li><Link to="/product/cream-cami" className="hover:text-black transition-colors">Cream Set</Link></li>
-              <li><Link to="/product/brown-cami" className="hover:text-black transition-colors">Brown Set</Link></li>
+              <li><Link to="/product/cami-set-cream" className="hover:text-black transition-colors">Cream Set</Link></li>
+              <li><Link to="/product/cami-set-brown" className="hover:text-black transition-colors">Brown Set</Link></li>
               <li><Link to="/policy" className="hover:text-black transition-colors">Care & Policy</Link></li>
             </ul>
           </div>
