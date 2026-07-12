@@ -22,7 +22,7 @@ const Home = () => {
           alt="Hero Campaign" 
           className="w-full h-full object-cover"
         />
-        <div className="absolute inset-0 bg-black/10 flex flex-col items-center justify-center text-white text-center p-4">
+        <div className="absolute inset-0 bg-black/20 flex flex-col items-center justify-center text-white text-center p-4 [text-shadow:0_2px_12px_rgba(0,0,0,0.7)]">
           <h1 className="text-4xl md:text-6xl lg:text-8xl font-serif tracking-widest mb-4 uppercase animate-fade-in">SNUGGLE</h1>
           <p className="text-base md:text-lg tracking-[0.2em] uppercase mb-8 animate-fade-in delay-100">COMFORT IS THE MOOD</p>
           <p className="max-w-md text-base md:text-lg mb-8 animate-fade-in delay-100 opacity-90 font-light">
@@ -44,9 +44,7 @@ const Home = () => {
           <span className="text-xs uppercase tracking-[0.2em] text-muted-foreground">About Snuggle</span>
           <h2 className="text-3xl md:text-5xl font-serif leading-tight">Your Soft Place to Land</h2>
           <p className="text-muted-foreground leading-relaxed text-lg font-light">
-            Snuggle was created for the woman who does everything — the one who shows up, dreams big, hustles hard, and still needs a place to breathe.
-            <br/><br/>
-            In a world that’s loud and overwhelming, Snuggle is your pause. Your comfort. Your softness.
+            Snuggle was created for the woman who does everything — the one who shows up, dreams big, hustles hard, and still needs a place to breathe. In a world that’s loud and overwhelming, Snuggle is your pause. Your comfort. Your softness.
           </p>
           <div className="grid grid-cols-2 md:grid-cols-3 gap-8 py-8">
             {['Minimal', 'Breathable', 'Thoughtfully Supported', 'Form-Hugging', 'Movement Design', 'Real Bodies'].map((item) => (
@@ -77,7 +75,7 @@ const Home = () => {
               className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
             />
             <div className="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-colors duration-300 flex items-center justify-center">
-              <h2 className="text-3xl md:text-4xl font-serif text-white uppercase tracking-widest group-hover:tracking-[0.2em] transition-all duration-300">
+              <h2 className="text-3xl md:text-4xl font-sans text-white uppercase tracking-widest group-hover:tracking-[0.2em] transition-all duration-300">
                 {cat.title}
               </h2>
             </div>
@@ -95,12 +93,10 @@ const Home = () => {
               <span className="italic">To Land</span>
             </h2>
             <p className="text-muted-foreground max-w-md leading-relaxed">
-              Inspired by calm mornings, slow moments, and the comfort of being held, every piece is designed to feel like home on your skin.
-              <br/><br/>
-              Warm tones, soft fabrics, gentle support, and thoughtful silhouettes come together to create loungewear you’ll live in — not just wear.
+              Inspired by calm mornings, slow moments, and the comfort of being held, every piece is designed to feel like home on your skin. Warm tones, soft fabrics, gentle support, and thoughtful silhouettes come together to create loungewear you’ll live in — not just wear.
             </p>
             <Link 
-              to="/editorial" 
+              to="/category/women"
               className="inline-flex items-center gap-2 border-b border-black pb-1 uppercase tracking-widest text-sm hover:text-muted-foreground hover:border-muted-foreground transition-colors"
             >
               Discover The Collection <ArrowRight className="w-4 h-4" />
@@ -126,20 +122,21 @@ const Home = () => {
           />
           <h2 className="text-2xl font-serif italic">Founder's Note</h2>
           <p className="leading-loose text-muted-foreground font-light">
-            "I created Snuggle because I wanted clothing that felt like comfort — not performance. Something soft, minimal, calming… something I could live in, not just wear.
-            <br/><br/>
-            After years of working in design, I realised the pieces I wanted didn’t exist in the quality I envisioned — soothing colours, soft fabrics, gentle support, and silhouettes that made you feel held, not squeezed.
-            <br/><br/>
-            Snuggle is my love letter to comfort, and I hope every piece feels like a deep breath for you."
+            "I created Snuggle because I wanted clothing that felt like comfort — not performance. Something soft, minimal, calming… something I could live in, not just wear. After years of working in design, I realised the pieces I wanted didn’t exist in the quality I envisioned — soothing colours, soft fabrics, gentle support, and silhouettes that made you feel held, not squeezed. Snuggle is my love letter to comfort, and I hope every piece feels like a deep breath for you."
           </p>
           <p className="uppercase tracking-widest text-sm">— Shimona, Founder</p>
+          <img
+            src="https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=minimal%20portrait%20of%20a%20woman%20founder%2C%20soft%20natural%20light%2C%20neutral%20beige%20background%2C%20editorial%20fashion%20photography%2C%20calm%20confident%20expression&image_size=portrait_4_3"
+            alt="Shimona, Founder"
+            className="w-32 h-32 rounded-full object-cover mx-auto grayscale-[15%]"
+          />
         </div>
       </section>
 
       {/* Featured Sets */}
       <section className="py-24 container-padding">
         <div className="flex justify-between items-end mb-12">
-          <h2 className="text-3xl md:text-4xl font-serif uppercase tracking-wide">The Collection</h2>
+          <h2 className="text-3xl md:text-4xl font-sans uppercase tracking-wide">The Collection</h2>
           <Link to="/category/sets" className="hidden md:block text-sm uppercase tracking-widest border-b border-transparent hover:border-black transition-all">View All</Link>
         </div>
         
@@ -156,7 +153,7 @@ const Home = () => {
                   Shop Now
                 </button>
               </div>
-              <h3 className="text-sm font-serif uppercase tracking-wide mb-1">{product.title}</h3>
+              <h3 className="text-sm font-sans uppercase tracking-wide mb-1">{product.title}</h3>
               <p className="text-sm text-muted-foreground">{formatPrice(product.priceRange?.minVariantPrice?.amount || '0', product.priceRange?.minVariantPrice?.currencyCode || 'INR')}</p>
             </Link>
           ))}

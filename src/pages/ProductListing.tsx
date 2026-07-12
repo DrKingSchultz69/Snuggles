@@ -85,7 +85,7 @@ const ProductListing = () => {
               </div>
               <div className="flex justify-between items-start">
                 <div>
-                  <h3 className="text-sm font-medium uppercase tracking-wide mb-1 group-hover:text-muted-foreground transition-colors">{product.title}</h3>
+                  <h3 className="text-sm font-sans font-medium uppercase tracking-wide mb-1 group-hover:text-muted-foreground transition-colors">{product.title}</h3>
                   <p className="text-xs text-muted-foreground">The Collection</p>
                 </div>
                 <p className="text-sm font-medium">{formatPrice(price, currency)}</p>

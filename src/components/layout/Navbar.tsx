@@ -14,7 +14,7 @@ const Navbar = () => {
       <div className="container-padding h-16 flex items-center justify-between">
         {/* Left: Logo */}
         <div className="flex-shrink-0">
-          <Link to="/" className="text-3xl font-logo font-normal">
+          <Link to="/" className="text-xl font-logo font-normal">
             Snuggle
           </Link>
         </div>
