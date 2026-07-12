@@ -20,7 +20,7 @@ export default {
         accent: "#F5F5F5",
       },
       fontFamily: {
-        sans: ["Poppins", "sans-serif"],
+        sans: ["Inter", "sans-serif"],
         serif: ["Playfair Display", "serif"],
         logo: ["Maglisto", "serif"],
       },
