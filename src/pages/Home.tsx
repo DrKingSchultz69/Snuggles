@@ -75,7 +75,7 @@ const Home = () => {
               className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
             />
             <div className="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-colors duration-300 flex items-center justify-center">
-              <h2 className="text-3xl md:text-4xl font-sans text-white uppercase tracking-widest group-hover:tracking-[0.2em] transition-all duration-300">
+              <h2 className="text-3xl md:text-4xl font-serif text-white uppercase tracking-widest group-hover:tracking-[0.2em] transition-all duration-300">
                 {cat.title}
               </h2>
             </div>
@@ -136,7 +136,7 @@ const Home = () => {
       {/* Featured Sets */}
       <section className="py-24 container-padding">
         <div className="flex justify-between items-end mb-12">
-          <h2 className="text-3xl md:text-4xl font-sans uppercase tracking-wide">The Collection</h2>
+          <h2 className="text-3xl md:text-4xl font-serif uppercase tracking-wide">The Collection</h2>
           <Link to="/category/sets" className="hidden md:block text-sm uppercase tracking-widest border-b border-transparent hover:border-black transition-all">View All</Link>
         </div>
         
@@ -153,7 +153,7 @@ const Home = () => {
                   Shop Now
                 </button>
               </div>
-              <h3 className="text-sm font-sans uppercase tracking-wide mb-1">{product.title}</h3>
+              <h3 className="text-sm font-serif uppercase tracking-wide mb-1">{product.title}</h3>
               <p className="text-sm text-muted-foreground">{formatPrice(product.priceRange?.minVariantPrice?.amount || '0', product.priceRange?.minVariantPrice?.currencyCode || 'INR')}</p>
             </Link>
           ))}

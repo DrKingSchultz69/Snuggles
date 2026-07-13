@@ -21,7 +21,7 @@ export default {
       },
       fontFamily: {
         sans: ["Inter", "sans-serif"],
-        serif: ["Playfair Display", "serif"],
+        serif: ["Fraunces", "serif"],
         logo: ["Maglisto", "serif"],
       },
       keyframes: {

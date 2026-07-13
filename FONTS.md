@@ -11,9 +11,9 @@
 - **Implementation**: `font-sans` class in Tailwind CSS (primary font in stack)
 - **Fallback**: sans-serif
 
-#### 2. Playfair Display (Serif)
-- **Usage**: Headings, titles, hero text
-- **Weights**: 400, 600
+#### 2. Fraunces (Serif)
+- **Usage**: Headings, titles, hero text (free lookalike for "Editors Note", a paid editorial serif)
+- **Weights**: 300–700, variable (opsz axis 9–144)
 - **Styles**: Regular, Italic
 - **Source**: Google Fonts
 - **Implementation**: `font-serif` class in Tailwind CSS (primary font in stack)
@@ -32,7 +32,7 @@
 Inter and Playfair Display are loaded via Google Fonts CDN in [index.html](file:///Volumes/Iker%20Bck%201/sys/CascadeProjects/Snuggles/index.html):
 
 ```html
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&display=swap" rel="stylesheet">
 ```
 
 ### Custom Fonts
@@ -54,7 +54,7 @@ Maglisto is loaded via `@font-face` in `src/index.css`:
 ```javascript
 fontFamily: {
   sans: ["Inter", "sans-serif"],
-  serif: ["Playfair Display", "serif"],
+  serif: ["Fraunces", "serif"],
   logo: ["Maglisto", "serif"],
 }
 ```
@@ -63,13 +63,20 @@ fontFamily: {
 
 - **Brand Logo**: `font-logo` (Maglisto)
 - **Navigation Links**: `font-sans` (Inter)
-- **Section Headings**: `font-serif` (Playfair Display)
+- **Section Headings**: `font-serif` (Fraunces)
 - **Body Text**: `font-sans` (Inter)
 - **Buttons**: `font-sans` (Inter)
 
 ## Version History
 
-### Version 1.2 (Current)
+### Version 1.3 (Current)
+- **Title Font**: Fraunces (free Google Fonts lookalike for "Editors Note", a paid editorial serif)
+- **Body Font**: Inter (unchanged)
+- **Logo Font**: Kept as Maglisto
+- **Status**: Active
+- **Date**: 2026-07-13
+
+### Version 1.2
 - **Title Font**: Reverted to Playfair Display
 - **Body Font**: Reverted to Inter
 - **Logo Font**: Kept as Maglisto
