@@ -45,9 +45,9 @@ const Home = () => {
           className="w-full h-full object-cover"
         />
         <div className="absolute inset-0 bg-black/20 flex flex-col items-center justify-center text-white text-center p-4 [text-shadow:0_2px_12px_rgba(0,0,0,0.7)]">
-          <h1 className="editors-note-font text-4xl md:text-6xl lg:text-8xl tracking-widest mb-4 uppercase animate-fade-in">SNUGGLE</h1>
+          <h1 className="font-logo text-4xl md:text-6xl lg:text-8xl tracking-widest mb-4 animate-fade-in">Snuggle</h1>
           <p className="text-base md:text-lg tracking-[0.2em] uppercase mb-8 animate-fade-in delay-100">COMFORT IS THE MOOD</p>
-          <p className="max-w-md text-base md:text-lg mb-8 animate-fade-in delay-100 opacity-90 font-light">
+          <p className="max-w-md text-base mb-8 animate-fade-in delay-100 opacity-90 font-light leading-relaxed">
             Minimal. Comforting. Intentionally designed.<br/>
             Effortless silhouettes, soft fabrics, and calm colours that move with you.
           </p>
@@ -65,26 +65,26 @@ const Home = () => {
         <div className="max-w-3xl mx-auto space-y-8">
           <span className="text-xs uppercase tracking-[0.2em] text-muted-foreground">About Snuggle</span>
           <h2 className="text-3xl md:text-5xl font-serif leading-tight">Your Soft Place to Land</h2>
-          <p className="text-muted-foreground leading-relaxed text-lg font-light">
-            Snuggle was created for the woman who does everything — the one who shows up, dreams big, hustles hard, and still needs a place to breathe. In a world that’s loud and overwhelming, Snuggle is your pause. Your comfort. Your softness.
+          <p className="text-muted-foreground leading-relaxed text-base font-light">
+            Snuggle was created for the woman who does everything the one who shows up, dreams big, hustles hard, and still needs a place to breathe. In a world that’s loud and overwhelming, Snuggle is your pause. Your comfort. Your softness.
           </p>
           <div className="grid grid-cols-2 md:grid-cols-3 gap-8 py-8">
             {['Minimal', 'Breathable', 'Thoughtfully Supported', 'Form-Hugging', 'Movement Design', 'Real Bodies'].map((item) => (
               <div key={item} className="flex flex-col items-center gap-2">
                 <span className="w-1.5 h-1.5 bg-muted-foreground rounded-full" />
-                <span className="text-sm uppercase tracking-wide text-muted-foreground">{item}</span>
+                <span className="text-xs uppercase tracking-wide text-muted-foreground">{item}</span>
               </div>
             ))}
           </div>
-          <p className="text-xl font-light italic">"It’s the clothing you reach for not because you need to… but because your body wants to."</p>
+          <p className="editors-note-font text-xl font-light italic text-muted-foreground">"It’s the clothing you reach for not because you need to… but because your body wants to."</p>
         </div>
       </section>
 
       {/* Categories Grid */}
       <section className="grid grid-cols-1 md:grid-cols-2 h-[80vh] w-full">
         {[
-          { title: 'Shop cream', link: '/product/cami-set-cream', img: 'minimal fashion woman cream cami set studio' },
-          { title: 'Shop brown', link: '/product/cami-set-brown', img: 'minimal fashion woman brown cami set studio' }
+          { title: 'shop cream', link: '/product/cami-set-cream', img: 'minimal fashion woman cream cami set studio' },
+          { title: 'shop brown', link: '/product/cami-set-brown', img: 'minimal fashion woman brown cami set studio' }
         ].map((cat) => (
           <Link 
             key={cat.title} 
@@ -115,7 +115,7 @@ const Home = () => {
               <span className="italic">To Land</span>
             </h2>
             <p className="text-muted-foreground max-w-md leading-relaxed">
-              Inspired by calm mornings, slow moments, and the comfort of being held, every piece is designed to feel like home on your skin. Warm tones, soft fabrics, gentle support, and thoughtful silhouettes come together to create loungewear you’ll live in — not just wear.
+              Inspired by calm mornings, slow moments, and the comfort of being held, every piece is designed to feel like home on your skin. Warm tones, soft fabrics, gentle support, and thoughtful silhouettes come together to create loungewear you’ll live in not just wear.
             </p>
             <Link 
               to="/category/women"
@@ -143,7 +143,7 @@ const Home = () => {
             className="h-16 mx-auto opacity-80" 
           />
           <h2 className="text-2xl font-serif italic">Founder's Note</h2>
-          <p className="leading-loose text-muted-foreground font-light">
+          <p className="leading-relaxed text-muted-foreground font-light text-base">
             "I created Snuggle because I wanted clothing that felt like comfort — not performance. Something soft, minimal, calming… something I could live in, not just wear. After years of working in design, I realised the pieces I wanted didn’t exist in the quality I envisioned — soothing colours, soft fabrics, gentle support, and silhouettes that made you feel held, not squeezed. Snuggle is my love letter to comfort, and I hope every piece feels like a deep breath for you."
           </p>
           <p className="uppercase tracking-widest text-sm">— Shimona, Founder</p>
@@ -158,7 +158,7 @@ const Home = () => {
       {/* Featured Sets */}
       <section className="py-24 container-padding">
         <div className="flex justify-between items-end mb-12">
-          <h2 className="editors-note-font text-3xl md:text-4xl uppercase tracking-wide">The Collection</h2>
+          <h2 className="editors-note-font text-3xl md:text-4xl tracking-wide">The Collection</h2>
           <Link to="/category/sets" className="hidden md:block text-sm uppercase tracking-widest border-b border-transparent hover:border-black transition-all">View All</Link>
         </div>
         
