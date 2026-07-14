@@ -10,6 +10,134 @@
   font-display: swap;
 }
 
+@font-face {
+  font-family: "Editor's Note";
+  src: url("/Font/editors-note/Editor'sNote-Hairline.otf") format("opentype");
+  font-weight: 100;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Editor's Note";
+  src: url("/Font/editors-note/Editor'sNote-HairlineItalic.otf") format("opentype");
+  font-weight: 100;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Editor's Note";
+  src: url("/Font/editors-note/Editor'sNote-Thin.otf") format("opentype");
+  font-weight: 100;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Editor's Note";
+  src: url("/Font/editors-note/Editor'sNote-ThinItalic.otf") format("opentype");
+  font-weight: 100;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Editor's Note";
+  src: url("/Font/editors-note/Editor'sNote-Extralight.otf") format("opentype");
+  font-weight: 200;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Editor's Note";
+  src: url("/Font/editors-note/Editor'sNote-ExtralightItalic.otf") format("opentype");
+  font-weight: 200;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Editor's Note";
+  src: url("/Font/editors-note/Editor'sNote-Regular.otf") format("opentype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Editor's Note";
+  src: url("/Font/editors-note/Editor'sNote-Italic.otf") format("opentype");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Editor's Note";
+  src: url("/Font/editors-note/Editor'sNote-Light.otf") format("opentype");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Editor's Note";
+  src: url("/Font/editors-note/Editor'sNote-LightItalic.otf") format("opentype");
+  font-weight: 300;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Editor's Note";
+  src: url("/Font/editors-note/Editor'sNote-Medium.otf") format("opentype");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Editor's Note";
+  src: url("/Font/editors-note/Editor'sNote-MediumItalic.otf") format("opentype");
+  font-weight: 500;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Editor's Note";
+  src: url("/Font/editors-note/Editor'sNote-Semibold.otf") format("opentype");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Editor's Note";
+  src: url("/Font/editors-note/Editor'sNote-SemiboldItalic.otf") format("opentype");
+  font-weight: 600;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Editor's Note";
+  src: url("/Font/editors-note/Editor'sNote-Bold.otf") format("opentype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Editor's Note";
+  src: url("/Font/editors-note/Editor'sNote-BoldItalic.otf") format("opentype");
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
+}
+
 @layer base {
   :root {
     --background: 0 0% 100%;

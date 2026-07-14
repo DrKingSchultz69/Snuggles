@@ -21,7 +21,8 @@ export default {
       },
       fontFamily: {
         sans: ["Inter", "sans-serif"],
-        serif: ["Fraunces", "serif"],
+        serif: ["\"Editor's Note\"", "Fraunces", "serif"],
+        title: ["\"Editor's Note\"", "Fraunces", "serif"],
         logo: ["Maglisto", "serif"],
       },
       keyframes: {
