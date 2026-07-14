@@ -1,17 +1,39 @@
 import { ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, type FormEvent } from 'react';
 import { getProducts, type ShopifyProduct } from '../lib/shopify';
 import { formatPrice } from '../lib/utils';
+import { subscribeToNewsletter } from '../lib/newsletter';
 
 const Home = () => {
   const [products, setProducts] = useState<ShopifyProduct[]>([]);
+  const [newsletterEmail, setNewsletterEmail] = useState('');
+  const [newsletterStatus, setNewsletterStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
+  const [newsletterMessage, setNewsletterMessage] = useState('');
 
   useEffect(() => {
     getProducts(4).then(data => {
       if (data) setProducts(data);
     });
   }, []);
+
+  const handleNewsletterSubmit = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    setNewsletterStatus('loading');
+    setNewsletterMessage('');
+
+    const result = await subscribeToNewsletter(newsletterEmail);
+
+    if (result.success) {
+      setNewsletterStatus('success');
+      setNewsletterMessage(result.message || 'Thank you for subscribing.');
+      setNewsletterEmail('');
+      return;
+    }
+
+    setNewsletterStatus('error');
+    setNewsletterMessage(result.error || 'Could not subscribe right now.');
+  };
 
   return (
     <div className="flex flex-col gap-0">
@@ -23,7 +45,7 @@ const Home = () => {
           className="w-full h-full object-cover"
         />
         <div className="absolute inset-0 bg-black/20 flex flex-col items-center justify-center text-white text-center p-4 [text-shadow:0_2px_12px_rgba(0,0,0,0.7)]">
-          <h1 className="text-4xl md:text-6xl lg:text-8xl font-serif tracking-widest mb-4 uppercase animate-fade-in">SNUGGLE</h1>
+          <h1 className="editors-note-font text-4xl md:text-6xl lg:text-8xl tracking-widest mb-4 uppercase animate-fade-in">SNUGGLE</h1>
           <p className="text-base md:text-lg tracking-[0.2em] uppercase mb-8 animate-fade-in delay-100">COMFORT IS THE MOOD</p>
           <p className="max-w-md text-base md:text-lg mb-8 animate-fade-in delay-100 opacity-90 font-light">
             Minimal. Comforting. Intentionally designed.<br/>
@@ -49,20 +71,20 @@ const Home = () => {
           <div className="grid grid-cols-2 md:grid-cols-3 gap-8 py-8">
             {['Minimal', 'Breathable', 'Thoughtfully Supported', 'Form-Hugging', 'Movement Design', 'Real Bodies'].map((item) => (
               <div key={item} className="flex flex-col items-center gap-2">
-                <span className="w-1.5 h-1.5 bg-black rounded-full" />
-                <span className="text-sm uppercase tracking-wide">{item}</span>
+                <span className="w-1.5 h-1.5 bg-muted-foreground rounded-full" />
+                <span className="text-sm uppercase tracking-wide text-muted-foreground">{item}</span>
               </div>
             ))}
           </div>
-          <p className="text-xl italic font-sans">"It’s the clothing you reach for not because you need to… but because your body wants to."</p>
+          <p className="text-xl font-light italic">"It’s the clothing you reach for not because you need to… but because your body wants to."</p>
         </div>
       </section>
 
       {/* Categories Grid */}
       <section className="grid grid-cols-1 md:grid-cols-2 h-[80vh] w-full">
         {[
-          { title: 'Shop Cream', link: '/product/cami-set-cream', img: 'minimal fashion woman cream cami set studio' },
-          { title: 'Shop Brown', link: '/product/cami-set-brown', img: 'minimal fashion woman brown cami set studio' }
+          { title: 'Shop cream', link: '/product/cami-set-cream', img: 'minimal fashion woman cream cami set studio' },
+          { title: 'Shop brown', link: '/product/cami-set-brown', img: 'minimal fashion woman brown cami set studio' }
         ].map((cat) => (
           <Link 
             key={cat.title} 
@@ -75,7 +97,7 @@ const Home = () => {
               className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
             />
             <div className="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-colors duration-300 flex items-center justify-center">
-              <h2 className="text-3xl md:text-4xl font-serif text-white uppercase tracking-widest group-hover:tracking-[0.2em] transition-all duration-300">
+              <h2 className="editors-note-font text-3xl md:text-4xl text-white tracking-widest group-hover:tracking-[0.2em] transition-all duration-300">
                 {cat.title}
               </h2>
             </div>
@@ -136,7 +158,7 @@ const Home = () => {
       {/* Featured Sets */}
       <section className="py-24 container-padding">
         <div className="flex justify-between items-end mb-12">
-          <h2 className="text-3xl md:text-4xl font-serif uppercase tracking-wide">The Collection</h2>
+          <h2 className="editors-note-font text-3xl md:text-4xl uppercase tracking-wide">The Collection</h2>
           <Link to="/category/sets" className="hidden md:block text-sm uppercase tracking-widest border-b border-transparent hover:border-black transition-all">View All</Link>
         </div>
         
@@ -153,7 +175,7 @@ const Home = () => {
                   Shop Now
                 </button>
               </div>
-              <h3 className="text-sm font-serif uppercase tracking-wide mb-1">{product.title}</h3>
+              <h3 className="text-sm tracking-wide mb-1">{product.title}</h3>
               <p className="text-sm text-muted-foreground">{formatPrice(product.priceRange?.minVariantPrice?.amount || '0', product.priceRange?.minVariantPrice?.currencyCode || 'INR')}</p>
             </Link>
           ))}
@@ -166,23 +188,32 @@ const Home = () => {
       {/* Newsletter Section */}
       <section className="py-32 bg-black text-white text-center">
         <div className="max-w-xl mx-auto px-4">
-          <h2 className="text-3xl md:text-4xl font-serif mb-6 uppercase tracking-widest">Join the List</h2>
+          <h2 className="font-sans text-3xl md:text-4xl mb-6 uppercase tracking-widest">Join the List</h2>
           <p className="text-gray-400 mb-8 leading-relaxed">
             Sign up for exclusive access to new collections, events, and editorial content.
           </p>
-          <form className="flex flex-col sm:flex-row gap-4">
+          <form onSubmit={handleNewsletterSubmit} className="flex flex-col sm:flex-row gap-4">
             <input 
               type="email" 
               placeholder="Email Address" 
+              value={newsletterEmail}
+              onChange={(event) => setNewsletterEmail(event.target.value)}
+              required
               className="flex-1 bg-transparent border border-gray-700 px-6 py-3 text-white focus:outline-none focus:border-white transition-colors text-center sm:text-left"
             />
             <button 
               type="submit" 
+              disabled={newsletterStatus === 'loading'}
               className="bg-white text-black px-8 py-3 uppercase tracking-widest text-sm hover:bg-gray-200 transition-colors"
             >
-              Subscribe
+              {newsletterStatus === 'loading' ? 'Subscribing' : 'Subscribe'}
             </button>
           </form>
+          {newsletterMessage && (
+            <p className={`mt-4 text-sm ${newsletterStatus === 'error' ? 'text-red-300' : 'text-gray-300'}`}>
+              {newsletterMessage}
+            </p>
+          )}
         </div>
       </section>
     </div>

@@ -4,13 +4,13 @@ const Policy = () => {
   return (
     <div className="max-w-3xl mx-auto py-24 px-4 space-y-16">
       <div className="text-center space-y-4">
-        <h1 className="text-4xl font-serif uppercase tracking-widest">Policy & Care</h1>
+        <h1 className="text-4xl uppercase tracking-widest">Policy & Care</h1>
         <p className="text-muted-foreground">Everything you need to know about your Snuggle pieces.</p>
       </div>
 
       {/* Shipping */}
       <section className="space-y-4">
-        <h2 className="text-2xl font-serif border-b border-black pb-2">Shipping Policy</h2>
+        <h2 className="text-2xl border-b border-black pb-2">Shipping Policy</h2>
         <div className="space-y-4 text-muted-foreground leading-relaxed">
           <p>
             <strong>Timeline:</strong> All Snuggle pieces are made in limited batches. Orders are dispatched within 5–10 working days from the date of purchase.
@@ -31,7 +31,7 @@ const Policy = () => {
 
       {/* Returns */}
       <section className="space-y-4">
-        <h2 className="text-2xl font-serif border-b border-black pb-2">Refund & Return Policy</h2>
+        <h2 className="text-2xl border-b border-black pb-2">Refund & Return Policy</h2>
         <div className="space-y-4 text-muted-foreground leading-relaxed">
           <p>
             At Snuggle, every piece is made in small batches with high attention to detail, fit, and comfort. 
@@ -54,7 +54,7 @@ const Policy = () => {
 
       {/* Care */}
       <section className="space-y-4">
-        <h2 className="text-2xl font-serif border-b border-black pb-2">Product Care</h2>
+        <h2 className="text-2xl border-b border-black pb-2">Product Care</h2>
         <div className="space-y-4 text-muted-foreground leading-relaxed">
           <p>To keep your Snuggle sets soft, comfy, and long-lasting:</p>
           <ul className="grid grid-cols-1 md:grid-cols-2 gap-2 text-sm">
@@ -70,7 +70,7 @@ const Policy = () => {
 
       {/* FAQ */}
       <section className="space-y-8">
-        <h2 className="text-2xl font-serif border-b border-black pb-2">Frequently Asked Questions</h2>
+        <h2 className="text-2xl border-b border-black pb-2">Frequently Asked Questions</h2>
         
         {[
           { q: "What sizes do you offer?", a: "We currently offer XS, S, M, L. Our sizing is designed to be form-fitting but comfortable." },

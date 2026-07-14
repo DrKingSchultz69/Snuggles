@@ -8,6 +8,9 @@ const ProductListing = () => {
   const { category } = useParams();
   const [products, setProducts] = useState<ShopifyProduct[]>([]);
   const [loading, setLoading] = useState(true);
+  const categoryTitle = category
+    ? category.replace(/-/g, ' ').replace(/\b\w/g, (char) => char.toUpperCase())
+    : 'All Products';
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -55,7 +58,7 @@ const ProductListing = () => {
   return (
     <div className="container-padding py-12">
       <div className="flex justify-between items-center mb-12">
-        <h1 className="text-4xl font-serif uppercase tracking-widest">{category?.replace('-', ' ') || 'All Products'}</h1>
+        <h1 className="editors-note-font text-4xl tracking-widest">{categoryTitle}</h1>
         
         <div className="flex gap-4 text-sm uppercase tracking-widest">
           <button className="flex items-center gap-2 hover:text-muted-foreground transition-colors">
@@ -85,7 +88,7 @@ const ProductListing = () => {
               </div>
               <div className="flex justify-between items-start">
                 <div>
-                  <h3 className="text-sm font-medium uppercase tracking-wide mb-1 group-hover:text-muted-foreground transition-colors">{product.title}</h3>
+                  <h3 className="text-sm font-medium tracking-wide mb-1 group-hover:text-muted-foreground transition-colors">{product.title}</h3>
                   <p className="text-xs text-muted-foreground">The Collection</p>
                 </div>
                 <p className="text-sm font-medium">{formatPrice(price, currency)}</p>

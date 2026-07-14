@@ -35,7 +35,7 @@ const Cart = () => {
 
   return (
     <div className="container-padding py-12 max-w-4xl mx-auto">
-      <h1 className="text-3xl font-serif uppercase tracking-widest mb-12 text-center">Shopping Bag</h1>
+      <h1 className="text-3xl uppercase tracking-widest mb-12 text-center">Shopping Bag</h1>
       
       <div className="space-y-8">
         {items.map((item) => (
@@ -51,7 +51,7 @@ const Cart = () => {
             <div className="flex-1 flex flex-col justify-between">
               <div className="flex justify-between items-start">
                 <div>
-                  <h3 className="font-serif uppercase tracking-wide mb-1">{item.name}</h3>
+                  <h3 className="tracking-wide mb-1">{item.name}</h3>
                   <p className="text-sm text-muted-foreground">Size: {item.size}</p>
                   <p className="text-sm text-muted-foreground">Color: {item.color}</p>
                 </div>

@@ -78,7 +78,7 @@ const SearchModal = () => {
             // Empty State: Recent Searches
             <div className="space-y-6">
               <div className="flex justify-between items-center">
-                <h3 className="text-xs font-serif uppercase tracking-widest text-muted-foreground">Recently Searched</h3>
+                <h3 className="text-xs uppercase tracking-widest text-muted-foreground">Recently Searched</h3>
                 {recentSearches.length > 0 && (
                   <button 
                     onClick={clearRecentSearches}
@@ -110,7 +110,7 @@ const SearchModal = () => {
           ) : (
             // Search Results
             <div className="space-y-6">
-              <h3 className="text-xs font-serif uppercase tracking-widest text-muted-foreground">
+              <h3 className="text-xs uppercase tracking-widest text-muted-foreground">
                 {searchResults.length} Result{searchResults.length !== 1 ? 's' : ''}
               </h3>
               

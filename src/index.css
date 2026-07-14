@@ -150,11 +150,16 @@
   }
 
   h1, h2, h3, h4, h5, h6 {
-    @apply font-serif tracking-tight;
+    @apply tracking-tight;
   }
 }
 
 @layer utilities {
+  /* Editors note fonts change: remove this class from tagged elements to revert. */
+  .editors-note-font {
+    font-family: "Editor's Note", Fraunces, serif;
+  }
+
   .text-balance {
     text-wrap: balance;
   }

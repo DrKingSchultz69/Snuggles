@@ -59,7 +59,7 @@ const Navbar = () => {
 
             <div className="absolute right-0 top-full mt-2 w-80 bg-white shadow-xl border border-muted opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform translate-y-2 group-hover:translate-y-0 z-50">
               <div className="p-4 border-b border-muted">
-                <span className="font-serif uppercase tracking-wide text-sm">Shopping Bag ({itemCount})</span>
+                <span className="uppercase tracking-wide text-sm">Shopping Bag ({itemCount})</span>
               </div>
               <div className="max-h-64 overflow-y-auto p-4 space-y-4">
                 {items.length === 0 ? (

@@ -144,7 +144,7 @@ const ProductDetail = () => {
           {/* Header */}
           <div className="space-y-4">
             <div className="flex justify-between items-start">
-              <h1 className="text-4xl font-serif uppercase tracking-widest leading-tight">
+              <h1 className="text-4xl tracking-widest leading-tight">
                 {productName}
               </h1>
               <button className="p-2 hover:bg-muted rounded-full transition-colors">
