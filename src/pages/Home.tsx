@@ -45,7 +45,7 @@ const Home = () => {
           className="w-full h-full object-cover"
         />
         <div className="absolute inset-0 bg-black/20 flex flex-col items-center justify-center text-white text-center p-4 [text-shadow:0_2px_12px_rgba(0,0,0,0.7)]">
-          <h1 className="font-logo text-2xl md:text-4xl lg:text-6xl tracking-normal mb-4 animate-fade-in">Snuggle</h1>
+          <h1 className="font-logo text-3xl md:text-5xl lg:text-7xl tracking-normal mb-4 animate-fade-in">Snuggle</h1>
           <p className="text-base md:text-lg tracking-[0.2em] uppercase mb-4 animate-fade-in delay-100">COMFORT IS THE MOOD</p>
           <p className="max-w-md text-base mb-8 animate-fade-in delay-100 opacity-90 font-light leading-relaxed">
             Minimal. Comforting. Intentionally designed.<br/>
@@ -149,11 +149,11 @@ const Home = () => {
             />
           </div>
           <div className="order-2 space-y-8 text-center">
-            <h2 className="text-2xl font-serif italic relative -left-24">Founder's Note</h2>
-            <p className="leading-relaxed text-muted-foreground font-light text-base relative -left-24">
+            <h2 className="text-2xl font-serif italic">Founder's Note</h2>
+            <p className="leading-relaxed text-muted-foreground font-light text-sm">
               "I created snuggle because I wanted clothing that felt like comfort - like a warm cup of tea on a rainy day.  Something soft, minimal, calming… something I could live in, not just wear. After years of working in design, I realised the pieces I wanted didn’t exist in the quality I envisioned — soothing colours, soft fabrics, gentle support, and silhouettes that made you feel held, not squeezed. Snuggle is my love letter to comfort, and I hope every piece feels like a deep breath for you."
             </p>
-            <p className="uppercase tracking-widest text-sm relative -left-24">— Shimona, Founder</p>
+            <p className="uppercase tracking-widest text-sm">— Shimona, Founder</p>
           </div>
         </div>
       </section>
