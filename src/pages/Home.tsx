@@ -149,11 +149,11 @@ const Home = () => {
             />
           </div>
           <div className="order-2 space-y-8 text-center">
-            <h2 className="text-2xl font-serif italic relative -left-10">Founder's Note</h2>
-            <p className="leading-relaxed text-muted-foreground font-light text-base relative -left-10">
+            <h2 className="text-2xl font-serif italic relative -left-24">Founder's Note</h2>
+            <p className="leading-relaxed text-muted-foreground font-light text-base relative -left-24">
               "I created snuggle because I wanted clothing that felt like comfort - like a warm cup of tea on a rainy day.  Something soft, minimal, calming… something I could live in, not just wear. After years of working in design, I realised the pieces I wanted didn’t exist in the quality I envisioned — soothing colours, soft fabrics, gentle support, and silhouettes that made you feel held, not squeezed. Snuggle is my love letter to comfort, and I hope every piece feels like a deep breath for you."
             </p>
-            <p className="uppercase tracking-widest text-sm relative -left-10">— Shimona, Founder</p>
+            <p className="uppercase tracking-widest text-sm relative -left-24">— Shimona, Founder</p>
           </div>
         </div>
       </section>
