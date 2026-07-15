@@ -28,7 +28,7 @@ const ProductListing = () => {
     {
       id: 'cami-set-cream',
       handle: 'cami-set-cream',
-      title: 'Cami Set Cream',
+      title: 'Cami set cream',
       priceRange: { minVariantPrice: { amount: '749.95', currencyCode: 'INR' } },
       images: { edges: [{ node: { url: 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=minimal%20fashion%20cream%20cami%20set%20lounge%20studio&image_size=portrait_4_3', altText: '' } }] },
       description: '',
@@ -37,7 +37,7 @@ const ProductListing = () => {
     {
       id: 'cami-set-brown',
       handle: 'cami-set-brown',
-      title: 'Cami Set Brown',
+      title: 'Cami set brown',
       priceRange: { minVariantPrice: { amount: '1200', currencyCode: 'INR' } },
       images: { edges: [{ node: { url: 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=minimal%20fashion%20brown%20cami%20set%20lounge%20studio&image_size=portrait_4_3', altText: '' } }] },
       description: '',
@@ -58,7 +58,7 @@ const ProductListing = () => {
   return (
     <div className="container-padding py-12">
       <div className="flex justify-between items-center mb-12">
-        <h1 className="editors-note-font text-4xl tracking-widest">{categoryTitle}</h1>
+        <h1 className="editors-note-font text-4xl tracking-normal">{categoryTitle}</h1>
         
         <div className="flex gap-4 text-sm uppercase tracking-widest">
           <button className="flex items-center gap-2 hover:text-muted-foreground transition-colors">
