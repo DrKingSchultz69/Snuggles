@@ -1,4 +1,3 @@
-import { Instagram } from 'lucide-react';
 import { useState, type FormEvent } from 'react';
 import { Link } from 'react-router-dom';
 import { subscribeToNewsletter } from '../../lib/newsletter';
@@ -65,15 +64,15 @@ const Footer = () => {
             <h4 className="editors-note-font font-medium text-sm tracking-wider">Newsletter</h4>
             <p className="text-muted-foreground text-sm">Subscribe to receive updates, access to exclusive deals, and more.</p>
             <form onSubmit={handleNewsletterSubmit} className="flex gap-2">
-              <input 
-                type="email" 
-                placeholder="Enter your email" 
+              <input
+                type="email"
+                placeholder="Enter your email"
                 value={email}
                 onChange={(event) => setEmail(event.target.value)}
                 required
                 className="flex-1 bg-muted px-4 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-black"
               />
-              <button 
+              <button
                 type="submit"
                 disabled={status === 'loading'}
                 className="bg-black text-white px-6 py-2 text-sm uppercase tracking-wide hover:bg-black/90 transition-colors"
@@ -86,16 +85,6 @@ const Footer = () => {
                 {message}
               </p>
             )}
-            <div className="flex gap-4 pt-4">
-              <a
-                href="https://www.instagram.com/in_snuggle?igsh=ZnQ3b3M0bGoxMA=="
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-muted-foreground hover:text-black transition-colors"
-              >
-                <Instagram className="w-5 h-5" />
-              </a>
-            </div>
           </div>
         </div>
 

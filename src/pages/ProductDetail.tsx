@@ -139,35 +139,35 @@ const ProductDetail = () => {
       </div>
 
       {/* Right: Info */}
-      <div className="p-8 lg:p-24 lg:h-screen lg:overflow-y-auto flex flex-col justify-start">
-        <div className="max-w-md mx-auto w-full space-y-12">
+      <div className="p-8 lg:px-24 lg:pt-2 lg:pb-24 lg:h-screen lg:overflow-y-auto flex flex-col justify-start">
+        <div className="max-w-md mx-auto w-full space-y-6">
           {/* Header */}
-          <div className="space-y-4">
+          <div className="space-y-1">
             <div className="flex justify-between items-start">
-              <h1 className="text-2xl tracking-normal leading-none">
+              <h1 className="text-xl font-normal tracking-normal leading-none">
                 {productName}
               </h1>
               <button className="p-2 hover:bg-muted rounded-full transition-colors">
                 <Share2 className="w-5 h-5" />
               </button>
             </div>
-            <p className="text-xl font-medium">{formatPrice(productPrice, productCurrency)}</p>
+            <p className="text-lg font-normal">{formatPrice(productPrice, productCurrency)}</p>
           </div>
 
           {/* Controls */}
-          <div className="space-y-8 pt-8 border-t border-muted">
+          <div className="space-y-8 pt-4 border-t border-muted">
             {/* Color Selection */}
             <div className="space-y-4">
               <span className="text-sm uppercase tracking-wide">Color: {productColor}</span>
               <div className="flex gap-4">
                 <button 
                   onClick={() => navigate('/product/cami-set-cream')}
-                  className={`w-8 h-8 rounded-full bg-[#F5F5F5] border-2 transition-all ${!isBrown ? 'border-black ring-1 ring-black ring-offset-2' : 'border-transparent hover:border-muted-foreground'}`}
+                  className={`w-7 h-7 rounded-full bg-[#F5F5F5] border-2 transition-all ${!isBrown ? 'border-black' : 'border-transparent hover:border-muted-foreground'}`}
                   aria-label="Cream"
                 />
                 <button 
                   onClick={() => navigate('/product/cami-set-brown')}
-                  className={`w-8 h-8 rounded-full bg-[#8B4513] border-2 transition-all ${isBrown ? 'border-black ring-1 ring-black ring-offset-2' : 'border-transparent hover:border-muted-foreground'}`}
+                  className={`w-7 h-7 rounded-full bg-[#8B4513] border-2 transition-all ${isBrown ? 'border-black' : 'border-transparent hover:border-muted-foreground'}`}
                   aria-label="Brown"
                 />
               </div>

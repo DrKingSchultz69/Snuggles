@@ -139,23 +139,22 @@ const Home = () => {
       </section>
 
       {/* Founder Note */}
-      <section className="py-24 px-4 bg-[#FDFBF7]">
-        <div className="max-w-2xl mx-auto text-center space-y-8">
-          <img 
-            src="https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=minimal%20signature%20handwritten%20shimona&image_size=landscape_16_9" 
-            alt="Signature" 
-            className="h-16 mx-auto opacity-80" 
-          />
-          <h2 className="text-2xl font-serif italic">Founder's Note</h2>
-          <p className="leading-relaxed text-muted-foreground font-light text-base">
-            "I created snuggle because I wanted clothing that felt like comfort - like a warm cup of tea on a rainy day.  Something soft, minimal, calming… something I could live in, not just wear. After years of working in design, I realised the pieces I wanted didn’t exist in the quality I envisioned — soothing colours, soft fabrics, gentle support, and silhouettes that made you feel held, not squeezed. Snuggle is my love letter to comfort, and I hope every piece feels like a deep breath for you."
-          </p>
-          <p className="uppercase tracking-widest text-sm">— Shimona, Founder</p>
-          <img
-            src="https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=minimal%20portrait%20of%20a%20woman%20founder%2C%20soft%20natural%20light%2C%20neutral%20beige%20background%2C%20editorial%20fashion%20photography%2C%20calm%20confident%20expression&image_size=portrait_4_3"
-            alt="Shimona, Founder"
-            className="w-32 h-32 rounded-full object-cover mx-auto grayscale-[15%]"
-          />
+      <section className="py-24 px-4 md:px-12 bg-white">
+        <div className="max-w-[1600px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          <div className="order-1">
+            <img
+              src="/images/founder.jpeg"
+              alt="Shimona, Founder"
+              className="w-full h-auto"
+            />
+          </div>
+          <div className="order-2 space-y-8 text-center">
+            <h2 className="text-2xl font-serif italic">Founder's Note</h2>
+            <p className="leading-relaxed text-muted-foreground font-light text-base">
+              "I created snuggle because I wanted clothing that felt like comfort - like a warm cup of tea on a rainy day.  Something soft, minimal, calming… something I could live in, not just wear. After years of working in design, I realised the pieces I wanted didn’t exist in the quality I envisioned — soothing colours, soft fabrics, gentle support, and silhouettes that made you feel held, not squeezed. Snuggle is my love letter to comfort, and I hope every piece feels like a deep breath for you."
+            </p>
+            <p className="uppercase tracking-widest text-sm">— Shimona, Founder</p>
+          </div>
         </div>
       </section>
 
