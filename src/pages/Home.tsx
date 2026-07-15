@@ -45,7 +45,7 @@ const Home = () => {
           className="w-full h-full object-cover"
         />
         <div className="absolute inset-0 bg-black/20 flex flex-col items-center justify-center text-white text-center p-4 [text-shadow:0_2px_12px_rgba(0,0,0,0.7)]">
-          <h1 className="font-logo text-4xl md:text-6xl lg:text-8xl tracking-widest mb-4 animate-fade-in">Snuggle</h1>
+          <h1 className="font-logo text-4xl md:text-6xl lg:text-8xl tracking-normal mb-4 animate-fade-in">Snuggle</h1>
           <p className="text-base md:text-lg tracking-[0.2em] uppercase mb-8 animate-fade-in delay-100">COMFORT IS THE MOOD</p>
           <p className="max-w-md text-base mb-8 animate-fade-in delay-100 opacity-90 font-light leading-relaxed">
             Minimal. Comforting. Intentionally designed.<br/>
@@ -66,7 +66,13 @@ const Home = () => {
           <span className="text-xs uppercase tracking-[0.2em] text-muted-foreground">About Snuggle</span>
           <h2 className="text-3xl md:text-5xl font-serif leading-tight">Your Soft Place to Land</h2>
           <p className="text-muted-foreground leading-relaxed text-base font-light">
-            Snuggle was created for the woman who does everything the one who shows up, dreams big, hustles hard, and still needs a place to breathe. In a world that’s loud and overwhelming, Snuggle is your pause. Your comfort. Your softness.
+            Snuggle was created for the woman who does everything. The one who shows up, dreams big, hustles hard, and still needs a place to breathe.
+            <br />
+            In a world that’s loud and overwhelming,
+            <br />
+            Snuggle is your{' '}pause.
+            <br />
+            Your comfort. Your softness.
           </p>
           <div className="grid grid-cols-2 md:grid-cols-3 gap-8 py-8">
             {['Minimal', 'Breathable', 'Thoughtfully Supported', 'Form-Hugging', 'Movement Design', 'Real Bodies'].map((item) => (
@@ -97,7 +103,7 @@ const Home = () => {
               className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
             />
             <div className="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-colors duration-300 flex items-center justify-center">
-              <h2 className="editors-note-font text-3xl md:text-4xl text-white tracking-widest group-hover:tracking-[0.2em] transition-all duration-300">
+              <h2 className="editors-note-font text-3xl md:text-4xl font-normal text-white tracking-normal group-hover:tracking-wide transition-all duration-300">
                 {cat.title}
               </h2>
             </div>
@@ -144,7 +150,7 @@ const Home = () => {
           />
           <h2 className="text-2xl font-serif italic">Founder's Note</h2>
           <p className="leading-relaxed text-muted-foreground font-light text-base">
-            "I created Snuggle because I wanted clothing that felt like comfort — not performance. Something soft, minimal, calming… something I could live in, not just wear. After years of working in design, I realised the pieces I wanted didn’t exist in the quality I envisioned — soothing colours, soft fabrics, gentle support, and silhouettes that made you feel held, not squeezed. Snuggle is my love letter to comfort, and I hope every piece feels like a deep breath for you."
+            "I created Snuggle because I wanted clothing that felt like coming home after a long day. Something soft, minimal, calming… something I could live in, not just wear. After years of working in design, I realised the pieces I wanted didn’t exist in the quality I envisioned: soothing colours, soft fabrics, gentle support, and silhouettes that made you feel held, not squeezed. Snuggle is my love letter to comfort, and I hope every piece feels like a deep breath for you."
           </p>
           <p className="uppercase tracking-widest text-sm">— Shimona, Founder</p>
           <img
