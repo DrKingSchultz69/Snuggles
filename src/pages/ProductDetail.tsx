@@ -139,7 +139,7 @@ const ProductDetail = () => {
       </div>
 
       {/* Right: Info */}
-      <div className="p-8 lg:p-24 lg:h-screen lg:overflow-y-auto flex flex-col justify-center">
+      <div className="p-8 lg:p-24 lg:h-screen lg:overflow-y-auto flex flex-col justify-start">
         <div className="max-w-md mx-auto w-full space-y-12">
           {/* Header */}
           <div className="space-y-4">

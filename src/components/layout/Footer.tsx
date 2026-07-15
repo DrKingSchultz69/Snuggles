@@ -1,4 +1,4 @@
-import { Facebook, Instagram, Twitter, Youtube } from 'lucide-react';
+import { Instagram } from 'lucide-react';
 import { useState, type FormEvent } from 'react';
 import { Link } from 'react-router-dom';
 import { subscribeToNewsletter } from '../../lib/newsletter';
@@ -87,10 +87,14 @@ const Footer = () => {
               </p>
             )}
             <div className="flex gap-4 pt-4">
-              <a href="#" className="text-muted-foreground hover:text-black transition-colors"><Instagram className="w-5 h-5" /></a>
-              <a href="#" className="text-muted-foreground hover:text-black transition-colors"><Facebook className="w-5 h-5" /></a>
-              <a href="#" className="text-muted-foreground hover:text-black transition-colors"><Twitter className="w-5 h-5" /></a>
-              <a href="#" className="text-muted-foreground hover:text-black transition-colors"><Youtube className="w-5 h-5" /></a>
+              <a
+                href="https://www.instagram.com/in_snuggle?igsh=ZnQ3b3M0bGoxMA=="
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-muted-foreground hover:text-black transition-colors"
+              >
+                <Instagram className="w-5 h-5" />
+              </a>
             </div>
           </div>
         </div>

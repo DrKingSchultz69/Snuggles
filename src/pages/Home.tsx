@@ -45,7 +45,7 @@ const Home = () => {
           className="w-full h-full object-cover"
         />
         <div className="absolute inset-0 bg-black/20 flex flex-col items-center justify-center text-white text-center p-4 [text-shadow:0_2px_12px_rgba(0,0,0,0.7)]">
-          <h1 className="font-logo text-4xl md:text-6xl lg:text-8xl tracking-normal mb-4 animate-fade-in">Snuggle</h1>
+          <h1 className="font-logo text-3xl md:text-5xl lg:text-7xl tracking-normal mb-4 animate-fade-in">Snuggle</h1>
           <p className="text-base md:text-lg tracking-[0.2em] uppercase mb-4 animate-fade-in delay-100">COMFORT IS THE MOOD</p>
           <p className="max-w-md text-base mb-8 animate-fade-in delay-100 opacity-90 font-light leading-relaxed">
             Minimal. Comforting. Intentionally designed.<br/>
@@ -179,7 +179,7 @@ const Home = () => {
                   Shop Now
                 </button>
               </div>
-              <h3 className="text-sm tracking-wide mb-1">{product.title}</h3>
+              <h3 className="text-sm tracking-normal mb-1">{product.title}</h3>
               <p className="text-sm text-muted-foreground">{formatPrice(product.priceRange?.minVariantPrice?.amount || '0', product.priceRange?.minVariantPrice?.currencyCode || 'INR')}</p>
             </Link>
           ))}
