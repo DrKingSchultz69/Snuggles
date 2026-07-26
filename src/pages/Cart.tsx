@@ -35,7 +35,7 @@ const Cart = () => {
 
   return (
     <div className="container-padding py-12 max-w-4xl mx-auto">
-      <h1 className="text-3xl uppercase tracking-widest mb-12 text-center">Shopping Bag</h1>
+      <h1 className="text-3xl uppercase tracking-tight mb-12 mt-8 py-4 text-center">Shopping Bag</h1>
       
       <div className="space-y-8">
         {items.map((item) => (
