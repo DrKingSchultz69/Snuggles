@@ -11,6 +11,7 @@ import cors from 'cors'
 import dotenv from 'dotenv'
 import authRoutes from './routes/auth.js'
 import newsletterRoutes from './routes/newsletter.js'
+import paymentRoutes from './routes/payment.js'
 
 // load env
 dotenv.config()
@@ -18,7 +19,16 @@ dotenv.config()
 const app: express.Application = express()
 
 app.use(cors())
-app.use(express.json({ limit: '10mb' }))
+app.use(
+  express.json({
+    limit: '10mb',
+    // Keep the raw bytes around so webhook handlers (e.g. Razorpay) can
+    // verify the payload signature against the exact body Razorpay signed.
+    verify: (req, _res, buf) => {
+      (req as express.Request & { rawBody?: Buffer }).rawBody = buf
+    },
+  }),
+)
 app.use(express.urlencoded({ extended: true, limit: '10mb' }))
 
 /**
@@ -26,6 +36,7 @@ app.use(express.urlencoded({ extended: true, limit: '10mb' }))
  */
 app.use('/api/auth', authRoutes)
 app.use('/api/newsletter', newsletterRoutes)
+app.use('/api/payment', paymentRoutes)
 
 /**
  * health

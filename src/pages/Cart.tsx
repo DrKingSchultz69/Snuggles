@@ -1,35 +1,13 @@
 import { Minus, Plus, X } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
-import { createCheckout } from '../lib/shopify';
 import { formatPrice } from '../lib/utils';
 
 const Cart = () => {
   const navigate = useNavigate();
   const { items, updateQuantity, removeItem, subtotal } = useCart();
 
-  const handleCheckout = async () => {
-    // Filter out items without Shopify variant IDs or mock IDs
-    const shopifyItems = items
-      .filter(item => item.variantId && !item.variantId.startsWith('mock-'))
-      .map(item => ({
-        variantId: item.variantId!,
-        quantity: item.quantity
-      }));
-
-    if (shopifyItems.length > 0) {
-      try {
-        const checkoutUrl = await createCheckout(shopifyItems);
-        if (checkoutUrl) {
-          window.location.href = checkoutUrl;
-          return;
-        }
-      } catch (error) {
-        console.error("Failed to generate Shopify checkout link:", error);
-      }
-    }
-    
-    // Fallback to static mock checkout page if not configured
+  const handleCheckout = () => {
     navigate('/checkout');
   };
 
