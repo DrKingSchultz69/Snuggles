@@ -1,5 +1,5 @@
 import { Search, ShoppingBag, User } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router';
 import { useCart } from '../../context/CartContext';
 import { useSearch } from '../../context/SearchContext';
 import { formatPrice } from '../../lib/utils';

@@ -1,5 +1,5 @@
 import { ArrowRight } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router';
 import { useEffect, useState, type FormEvent } from 'react';
 import { getProducts, type ShopifyProduct } from '../lib/shopify';
 import { formatPrice } from '../lib/utils';

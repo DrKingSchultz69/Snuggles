@@ -1,8 +1,20 @@
 import { Router, type Request } from 'express';
+import rateLimit from 'express-rate-limit';
 import Razorpay from 'razorpay';
 import crypto from 'crypto';
+import { escapeHtml } from '../lib/html.js';
 
 const router = Router();
+
+// Throttle the customer-facing endpoints so a script can't hammer the
+// Shopify/Razorpay APIs through us. The webhook route is excluded since
+// those calls come from Razorpay's own servers, not a browser.
+const paymentLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  limit: 20,
+  standardHeaders: true,
+  legacyHeaders: false,
+});
 
 // Lazily initialize Razorpay so env vars are guaranteed to be loaded first
 let razorpay: Razorpay | null = null;
@@ -44,7 +56,7 @@ async function sendOrderNotificationEmail(details: {
   }
 
   const itemsHtml = details.items
-    .map((item) => `<li>${item.label} &times; ${item.quantity}</li>`)
+    .map((item) => `<li>${escapeHtml(item.label)} &times; ${item.quantity}</li>`)
     .join('');
 
   try {
@@ -60,8 +72,8 @@ async function sendOrderNotificationEmail(details: {
         subject: `New Snuggle order — ₹${(details.amount / 100).toFixed(2)}`,
         html: `
           <p>A new order was paid for.</p>
-          <p><strong>Order ID:</strong> ${details.orderId}</p>
-          <p><strong>Payment ID:</strong> ${details.paymentId}</p>
+          <p><strong>Order ID:</strong> ${escapeHtml(details.orderId)}</p>
+          <p><strong>Payment ID:</strong> ${escapeHtml(details.paymentId)}</p>
           <p><strong>Amount:</strong> ₹${(details.amount / 100).toFixed(2)}</p>
           <p><strong>Items:</strong></p>
           <ul>${itemsHtml}</ul>
@@ -121,7 +133,7 @@ async function getVariantPrices(variantIds: string[]): Promise<Map<string, numbe
 
 // Endpoint to create an order. The client only sends variant IDs + quantities;
 // the actual price is looked up server-side so it can't be tampered with.
-router.post('/create-order', async (req, res) => {
+router.post('/create-order', paymentLimiter, async (req, res) => {
   try {
     const items = req.body?.items as CartItemInput[] | undefined;
 
@@ -171,7 +183,7 @@ router.post('/create-order', async (req, res) => {
 });
 
 // Endpoint to verify payment signature
-router.post('/verify', async (req, res) => {
+router.post('/verify', paymentLimiter, async (req, res) => {
   try {
     const { razorpay_order_id, razorpay_payment_id, razorpay_signature } = req.body;
 

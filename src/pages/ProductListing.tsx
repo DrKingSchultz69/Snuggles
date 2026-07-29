@@ -1,5 +1,5 @@
 import { ChevronDown, SlidersHorizontal, Loader2 } from 'lucide-react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router';
 import { useEffect, useState } from 'react';
 import { getProducts, type ShopifyProduct } from '../lib/shopify';
 import { formatPrice } from '../lib/utils';

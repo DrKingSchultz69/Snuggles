@@ -1,5 +1,5 @@
 import { Minus, Plus, X } from 'lucide-react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router';
 import { useCart } from '../context/CartContext';
 import { formatPrice } from '../lib/utils';
 

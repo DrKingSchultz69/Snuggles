@@ -18,6 +18,12 @@ dotenv.config()
 
 const app: express.Application = express()
 
+// Vercel (and most hosts) sit in front of this app as a reverse proxy, so
+// req.ip would otherwise resolve to the proxy's address for every request —
+// this tells Express to read the real client IP from X-Forwarded-For,
+// which the rate limiters below rely on.
+app.set('trust proxy', 1)
+
 app.use(cors())
 app.use(
   express.json({

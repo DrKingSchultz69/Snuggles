@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router';
 import { useCart } from '../context/CartContext';
 import { RazorpayButton } from '../components/RazorpayButton';
 

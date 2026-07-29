@@ -1,6 +1,6 @@
 import { Minus, Plus, Share2, Loader2 } from 'lucide-react';
 import { useState, useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router';
 import { useCart } from '../context/CartContext';
 import { getProduct, type ShopifyProduct, type ShopifyVariantEdge, type ShopifySelectedOption, type ShopifyImageEdge } from '../lib/shopify';
 import { formatPrice } from '../lib/utils';

@@ -1,8 +1,17 @@
 import { Router, type Request, type Response } from 'express'
+import rateLimit from 'express-rate-limit'
+import { escapeHtml } from '../lib/html.js'
 
 const router = Router()
 
 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+
+const subscribeLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  limit: 10,
+  standardHeaders: true,
+  legacyHeaders: false,
+})
 
 type ResendResponse = {
   id?: string
@@ -10,7 +19,7 @@ type ResendResponse = {
   name?: string
 }
 
-router.post('/subscribe', async (req: Request, res: Response): Promise<void> => {
+router.post('/subscribe', subscribeLimiter, async (req: Request, res: Response): Promise<void> => {
   const email = String(req.body?.email || '').trim().toLowerCase()
 
   if (!emailPattern.test(email)) {
@@ -48,7 +57,7 @@ router.post('/subscribe', async (req: Request, res: Response): Promise<void> => 
         subject: 'New Snuggle newsletter subscriber',
         html: `
           <p>A customer subscribed to the Snuggle newsletter.</p>
-          <p><strong>Email:</strong> ${email}</p>
+          <p><strong>Email:</strong> ${escapeHtml(email)}</p>
         `,
       }),
     })

@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
 import { Search, X, Clock, ArrowRight } from 'lucide-react';
 import { useSearch } from '../../context/SearchContext';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router';
 import { formatPrice } from '../../lib/utils';
 
 const SearchModal = () => {
