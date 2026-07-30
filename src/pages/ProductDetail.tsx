@@ -13,6 +13,7 @@ const ProductDetail = () => {
   const [quantity, setQuantity] = useState(1);
   const [loading, setLoading] = useState(true);
   const [shopifyProduct, setShopifyProduct] = useState<ShopifyProduct | null>(null);
+  const [openSection, setOpenSection] = useState<'fabric' | 'shipping' | null>(null);
   
   // Determine product based on URL
   const isBrown = id?.includes('brown');
@@ -252,33 +253,47 @@ const ProductDetail = () => {
           {/* Accordion sections */}
           <div className="pt-12 space-y-4">
              <div className="border-b border-muted py-4 group">
-               <div className="flex justify-between cursor-pointer">
+               <button
+                 type="button"
+                 onClick={() => setOpenSection(openSection === 'fabric' ? null : 'fabric')}
+                 className="flex justify-between items-center w-full cursor-pointer text-left"
+                 aria-expanded={openSection === 'fabric'}
+               >
                  <span className="uppercase tracking-wide text-sm group-hover:pl-2 transition-all">Fabric & Care</span>
-                 <Plus className="w-4 h-4" />
-               </div>
-               <div className="hidden group-hover:block pt-4 text-sm text-muted-foreground space-y-2 animate-fade-in">
-                 <p>To keep your Snuggle sets soft, comfy, and long-lasting:</p>
-                 <ul className="list-disc list-inside space-y-1">
-                   <li>Hand wash or machine wash on gentle mode</li>
-                   <li>Use mild detergent with similar colours</li>
-                   <li>Do not bleach, tumble dry, or wring</li>
-                   <li>Dry flat or hang in shade</li>
-                   <li>Iron on low heat (avoid elastics)</li>
-                   <li>Remove pads before washing</li>
-                 </ul>
-               </div>
+                 <Plus className={`w-4 h-4 transition-transform ${openSection === 'fabric' ? 'rotate-45' : ''}`} />
+               </button>
+               {openSection === 'fabric' && (
+                 <div className="pt-4 text-sm text-muted-foreground space-y-2 animate-fade-in">
+                   <p>To keep your Snuggle sets soft, comfy, and long-lasting:</p>
+                   <ul className="list-disc list-inside space-y-1">
+                     <li>Hand wash or machine wash on gentle mode</li>
+                     <li>Use mild detergent with similar colours</li>
+                     <li>Do not bleach, tumble dry, or wring</li>
+                     <li>Dry flat or hang in shade</li>
+                     <li>Iron on low heat (avoid elastics)</li>
+                     <li>Remove pads before washing</li>
+                   </ul>
+                 </div>
+               )}
              </div>
 
              <div className="border-b border-muted py-4 group">
-               <div className="flex justify-between cursor-pointer">
+               <button
+                 type="button"
+                 onClick={() => setOpenSection(openSection === 'shipping' ? null : 'shipping')}
+                 className="flex justify-between items-center w-full cursor-pointer text-left"
+                 aria-expanded={openSection === 'shipping'}
+               >
                  <span className="uppercase tracking-wide text-sm group-hover:pl-2 transition-all">Shipping & Returns</span>
-                 <Plus className="w-4 h-4" />
-               </div>
-               <div className="hidden group-hover:block pt-4 text-sm text-muted-foreground space-y-2 animate-fade-in">
-                 <p><strong>Shipping:</strong> Dispatched within 5–10 working days.</p>
-                 <p><strong>Returns:</strong> No return/exchange policy due to hygiene standards.</p>
-                 <p>Replacements offered only for damaged/wrong items with unboxing video within 48h.</p>
-               </div>
+                 <Plus className={`w-4 h-4 transition-transform ${openSection === 'shipping' ? 'rotate-45' : ''}`} />
+               </button>
+               {openSection === 'shipping' && (
+                 <div className="pt-4 text-sm text-muted-foreground space-y-2 animate-fade-in">
+                   <p><strong>Shipping:</strong> Dispatched within 5–10 working days.</p>
+                   <p><strong>Returns:</strong> No return/exchange policy due to hygiene standards.</p>
+                   <p>Replacements offered only for damaged/wrong items with unboxing video within 48h.</p>
+                 </div>
+               )}
              </div>
           </div>
         </div>
