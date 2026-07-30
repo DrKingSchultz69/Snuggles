@@ -91,7 +91,7 @@ const Terms = () => {
         <div className="space-y-4 text-muted-foreground leading-relaxed">
           <p>
             These Terms are governed by the laws of India, and any disputes will be subject to
-            the exclusive jurisdiction of the courts in <strong>[your city], India</strong>.
+            the exclusive jurisdiction of the courts in <strong>Chennai, India</strong>.
           </p>
         </div>
       </section>
@@ -110,7 +110,10 @@ const Terms = () => {
         <h2 className="text-2xl border-b border-black pb-2">Contact Us</h2>
         <div className="space-y-4 text-muted-foreground leading-relaxed">
           <p>
-            Questions about these Terms can be sent to <strong>[support@snuggle.co.in]</strong>.
+            Questions about these Terms can be sent to{' '}
+            <a href="mailto:support@snuggle.co.in" className="underline hover:text-black transition-colors">
+              support@snuggle.co.in
+            </a>.
           </p>
         </div>
       </section>

@@ -141,7 +141,9 @@ const Privacy = () => {
         <div className="space-y-4 text-muted-foreground leading-relaxed">
           <p>
             For any privacy-related questions or requests, contact us at{' '}
-            <strong>[support@snuggle.co.in]</strong>.
+            <a href="mailto:support@snuggle.co.in" className="underline hover:text-black transition-colors">
+              support@snuggle.co.in
+            </a>.
           </p>
         </div>
       </section>
