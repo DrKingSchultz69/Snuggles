@@ -6,6 +6,8 @@ import ProductDetail from './pages/ProductDetail';
 import Cart from './pages/Cart';
 import Policy from './pages/Policy';
 import Contact from './pages/Contact';
+import Privacy from './pages/Privacy';
+import Terms from './pages/Terms';
 import CheckoutPending from './pages/CheckoutPending';
 import Empty from './components/Empty';
 import ScrollToTop from './components/ScrollToTop';
@@ -21,6 +23,8 @@ function App() {
         <Route path="/cart" element={<Cart />} />
         <Route path="/policy" element={<Policy />} />
         <Route path="/contact" element={<Contact />} />
+        <Route path="/privacy" element={<Privacy />} />
+        <Route path="/terms" element={<Terms />} />
         <Route path="/checkout" element={<CheckoutPending />} />
 
         {/* Fallback routes */}
