@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import type { CartItem } from '../context/CartContext';
+import type { ShippingAddress } from './AddressForm';
 
 // Dynamically load the Razorpay script
 const loadRazorpayScript = () => {
@@ -12,7 +13,15 @@ const loadRazorpayScript = () => {
   });
 };
 
-export const RazorpayButton = ({ amount, items }: { amount: number; items: CartItem[] }) => {
+export const RazorpayButton = ({
+  amount,
+  items,
+  address,
+}: {
+  amount: number;
+  items: CartItem[];
+  address: ShippingAddress;
+}) => {
   const [loading, setLoading] = useState(false);
 
   const handlePayment = async () => {
@@ -39,6 +48,7 @@ export const RazorpayButton = ({ amount, items }: { amount: number; items: CartI
             size: item.size,
             color: item.color,
           })),
+          address,
         }),
       });
 
@@ -75,9 +85,9 @@ export const RazorpayButton = ({ amount, items }: { amount: number; items: CartI
           }
         },
         prefill: {
-          name: 'Customer Name',
-          email: 'customer@example.com',
-          contact: '9999999999',
+          name: address.name,
+          email: address.email,
+          contact: address.phone,
         },
         theme: {
           color: '#000000',

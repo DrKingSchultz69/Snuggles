@@ -38,13 +38,39 @@ interface CartItemInput {
   color?: string;
 }
 
-const MAX_NOTED_ITEMS = 15; // Razorpay allows at most 15 note key-value pairs
+interface ShippingAddressInput {
+  name: string;
+  email: string;
+  phone: string;
+  addressLine: string;
+  city: string;
+  state: string;
+  pincode: string;
+}
+
+const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+function isValidAddress(address: unknown): address is ShippingAddressInput {
+  const a = address as Partial<ShippingAddressInput> | null;
+  return (
+    !!a &&
+    typeof a.name === 'string' && a.name.trim().length > 0 &&
+    typeof a.email === 'string' && emailPattern.test(a.email.trim()) &&
+    typeof a.phone === 'string' && /^\d{10}$/.test(a.phone.trim()) &&
+    typeof a.addressLine === 'string' && a.addressLine.trim().length > 0 &&
+    typeof a.city === 'string' && a.city.trim().length > 0 &&
+    typeof a.state === 'string' && a.state.trim().length > 0 &&
+    typeof a.pincode === 'string' && /^\d{6}$/.test(a.pincode.trim())
+  );
+}
 
 async function sendOrderNotificationEmail(details: {
   orderId: string;
   paymentId: string;
   amount: number; // in paise
   items: { label: string; quantity: number }[];
+  customer?: string;
+  shippingAddress?: string;
 }) {
   const resendApiKey = process.env.RESEND_API_KEY;
   const notifyTo = process.env.ORDER_NOTIFY_TO || process.env.NEWSLETTER_NOTIFY_TO;
@@ -75,6 +101,8 @@ async function sendOrderNotificationEmail(details: {
           <p><strong>Order ID:</strong> ${escapeHtml(details.orderId)}</p>
           <p><strong>Payment ID:</strong> ${escapeHtml(details.paymentId)}</p>
           <p><strong>Amount:</strong> ₹${(details.amount / 100).toFixed(2)}</p>
+          ${details.customer ? `<p><strong>Customer:</strong> ${escapeHtml(details.customer)}</p>` : ''}
+          ${details.shippingAddress ? `<p><strong>Ship to:</strong> ${escapeHtml(details.shippingAddress)}</p>` : ''}
           <p><strong>Items:</strong></p>
           <ul>${itemsHtml}</ul>
         `,
@@ -136,6 +164,7 @@ async function getVariantPrices(variantIds: string[]): Promise<Map<string, numbe
 router.post('/create-order', paymentLimiter, async (req, res) => {
   try {
     const items = req.body?.items as CartItemInput[] | undefined;
+    const address = req.body?.address;
 
     if (!Array.isArray(items) || items.length === 0) {
       res.status(400).json({ success: false, error: 'No items provided' });
@@ -147,6 +176,11 @@ router.post('/create-order', paymentLimiter, async (req, res) => {
         res.status(400).json({ success: false, error: 'Invalid cart item' });
         return;
       }
+    }
+
+    if (!isValidAddress(address)) {
+      res.status(400).json({ success: false, error: 'A valid shipping address is required' });
+      return;
     }
 
     const prices = await getVariantPrices(items.map((item) => item.variantId));
@@ -161,11 +195,19 @@ router.post('/create-order', paymentLimiter, async (req, res) => {
       total += price * item.quantity;
     }
 
-    const notes: Record<string, string> = {};
-    items.slice(0, MAX_NOTED_ITEMS).forEach((item, index) => {
-      const label = [item.name, item.size, item.color].filter(Boolean).join(' / ') || item.variantId;
-      notes[`item_${index}`] = `${label} x${item.quantity}`.slice(0, 256);
-    });
+    const itemsSummary = items
+      .map((item) => {
+        const label = [item.name, item.size, item.color].filter(Boolean).join(' / ') || item.variantId;
+        return `${label} x${item.quantity}`;
+      })
+      .join('; ')
+      .slice(0, 256);
+
+    const notes: Record<string, string> = {
+      customer: `${address.name} | ${address.phone} | ${address.email}`.slice(0, 256),
+      shipping_address: `${address.addressLine}, ${address.city}, ${address.state} - ${address.pincode}`.slice(0, 256),
+      items: itemsSummary,
+    };
 
     const options = {
       amount: Math.round(total * 100), // Razorpay expects amount in paise
@@ -201,11 +243,14 @@ router.post('/verify', paymentLimiter, async (req, res) => {
       // orders aren't silently missed in the meantime.
       if (!process.env.RAZORPAY_WEBHOOK_SECRET) {
         const order = await getRazorpay().orders.fetch(razorpay_order_id);
+        const notes = order.notes as Record<string, string | number> | undefined;
         await sendOrderNotificationEmail({
           orderId: order.id,
           paymentId: razorpay_payment_id,
           amount: Number(order.amount),
-          items: parseNotedItems(order.notes as Record<string, string | number> | undefined),
+          items: parseNotedItems(notes),
+          customer: notes?.customer ? String(notes.customer) : undefined,
+          shippingAddress: notes?.shipping_address ? String(notes.shipping_address) : undefined,
         });
       }
 
@@ -220,12 +265,12 @@ router.post('/verify', paymentLimiter, async (req, res) => {
 });
 
 function parseNotedItems(notes: Record<string, string | number> | undefined) {
-  return Object.entries(notes || {})
-    .filter(([key]) => key.startsWith('item_'))
-    .map(([, value]) => {
-      const match = /^(.*) x(\d+)$/.exec(String(value));
-      return match ? { label: match[1], quantity: parseInt(match[2], 10) } : { label: String(value), quantity: 1 };
-    });
+  const raw = String(notes?.items ?? '');
+  if (!raw) return [];
+  return raw.split('; ').map((entry) => {
+    const match = /^(.*) x(\d+)$/.exec(entry);
+    return match ? { label: match[1], quantity: parseInt(match[2], 10) } : { label: entry, quantity: 1 };
+  });
 }
 
 // Razorpay calls this directly (server-to-server) once a payment is
@@ -255,11 +300,14 @@ router.post('/webhook', async (req, res) => {
       const payment = req.body?.payload?.payment?.entity;
       if (payment?.order_id) {
         const order = await getRazorpay().orders.fetch(payment.order_id);
+        const notes = order.notes as Record<string, string | number> | undefined;
         await sendOrderNotificationEmail({
           orderId: order.id,
           paymentId: payment.id,
           amount: Number(order.amount),
-          items: parseNotedItems(order.notes as Record<string, string | number> | undefined),
+          items: parseNotedItems(notes),
+          customer: notes?.customer ? String(notes.customer) : undefined,
+          shippingAddress: notes?.shipping_address ? String(notes.shipping_address) : undefined,
         });
       }
     }
