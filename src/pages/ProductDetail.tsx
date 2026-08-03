@@ -104,6 +104,7 @@ const ProductDetail = () => {
 
   const handleAddToCart = () => {
     addToCart({
+      handle: id || 'cami-set-cream',
       variantId: selectedVariant?.id,
       name: productName,
       size: selectedSize,

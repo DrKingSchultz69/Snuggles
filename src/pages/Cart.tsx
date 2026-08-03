@@ -18,18 +18,22 @@ const Cart = () => {
       <div className="space-y-8">
         {items.map((item) => (
           <div key={item.id} className="flex gap-6 py-6 border-b border-muted">
-            <div className="w-24 h-32 bg-muted shrink-0">
-               <img 
-                src={item.img}
-                alt={item.name} 
-                className="w-full h-full object-cover"
-              />
-            </div>
+            <Link to={`/product/${item.handle || item.name.toLowerCase().replace('snuggle ', '').replace(/ - /g, '-').replace(/ /g, '-')}`}>
+              <div className="w-24 h-32 bg-muted shrink-0">
+                 <img 
+                  src={item.img}
+                  alt={item.name} 
+                  className="w-full h-full object-cover"
+                />
+              </div>
+            </Link>
             
             <div className="flex-1 flex flex-col justify-between">
               <div className="flex justify-between items-start">
                 <div>
-                  <h3 className="tracking-wide mb-1">{item.name}</h3>
+                  <Link to={`/product/${item.handle || item.name.toLowerCase().replace('snuggle ', '').replace(/ - /g, '-').replace(/ /g, '-')}`}>
+                    <h3 className="tracking-wide mb-1 hover:text-muted-foreground transition-colors">{item.name}</h3>
+                  </Link>
                   <p className="text-sm text-muted-foreground">Size: {item.size}</p>
                   <p className="text-sm text-muted-foreground">Color: {item.color}</p>
                 </div>
