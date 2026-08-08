@@ -9,6 +9,7 @@ import Contact from './pages/Contact';
 import Privacy from './pages/Privacy';
 import Terms from './pages/Terms';
 import CheckoutPending from './pages/CheckoutPending';
+import Account from './pages/Account';
 import Empty from './components/Empty';
 import ScrollToTop from './components/ScrollToTop';
 
@@ -26,9 +27,9 @@ function App() {
         <Route path="/privacy" element={<Privacy />} />
         <Route path="/terms" element={<Terms />} />
         <Route path="/checkout" element={<CheckoutPending />} />
+        <Route path="/account" element={<Account />} />
 
         {/* Fallback routes */}
-        <Route path="/account" element={<Empty />} />
         <Route path="/wishlist" element={<Empty />} />
         <Route path="*" element={<Empty />} />
       </Routes>

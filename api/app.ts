@@ -9,11 +9,15 @@ import express, {
 } from 'express'
 import cors from 'cors'
 import dotenv from 'dotenv'
-import authRoutes from './routes/auth.js'
+import accountRoutes from './routes/account.js'
 import newsletterRoutes from './routes/newsletter.js'
 import paymentRoutes from './routes/payment.js'
 
-// load env
+// load env. .env.local holds the Vercel-provisioned values (`vercel env pull`)
+// and .env the older hand-managed secrets; dotenv never overwrites a key that
+// is already set, so loading .env.local first gives it precedence. Neither
+// file exists on Vercel, where the platform injects the variables directly.
+dotenv.config({ path: '.env.local' })
 dotenv.config()
 
 const app: express.Application = express()
@@ -40,7 +44,7 @@ app.use(express.urlencoded({ extended: true, limit: '10mb' }))
 /**
  * API Routes
  */
-app.use('/api/auth', authRoutes)
+app.use('/api/account', accountRoutes)
 app.use('/api/newsletter', newsletterRoutes)
 app.use('/api/payment', paymentRoutes)
 
