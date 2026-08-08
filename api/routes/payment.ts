@@ -3,6 +3,9 @@ import rateLimit from 'express-rate-limit';
 import Razorpay from 'razorpay';
 import crypto from 'crypto';
 import { escapeHtml } from '../lib/html.js';
+import { markOrderPaid, recordOrderCreated, type OrderItemRecord } from '../lib/orders.js';
+import { optionalAuth, type AuthedRequest } from '../lib/auth.js';
+import { saveProfile } from '../lib/profiles.js';
 
 const router = Router();
 
@@ -161,7 +164,7 @@ async function getVariantPrices(variantIds: string[]): Promise<Map<string, numbe
 
 // Endpoint to create an order. The client only sends variant IDs + quantities;
 // the actual price is looked up server-side so it can't be tampered with.
-router.post('/create-order', paymentLimiter, async (req, res) => {
+router.post('/create-order', paymentLimiter, optionalAuth, async (req: AuthedRequest, res) => {
   try {
     const items = req.body?.items as CartItemInput[] | undefined;
     const address = req.body?.address;
@@ -217,6 +220,37 @@ router.post('/create-order', paymentLimiter, async (req, res) => {
     };
 
     const order = await getRazorpay().orders.create(options);
+
+    const itemRecords: OrderItemRecord[] = items.map((item) => ({
+      label: [item.name, item.size, item.color].filter(Boolean).join(' / ') || item.variantId,
+      quantity: item.quantity,
+      variantId: item.variantId,
+    }));
+
+    // userId is undefined for guest checkout, which keeps working exactly as
+    // before — the order is simply not attached to an account.
+    const userId = req.userId ?? null;
+
+    await recordOrderCreated({
+      razorpayOrderId: order.id,
+      userId,
+      amountPaise: Number(order.amount),
+      currency: order.currency,
+      address,
+      items: itemRecords,
+    });
+
+    // Signed-in customers get the address they just typed saved back to their
+    // profile so the next checkout pre-fills. Best-effort on purpose: failing
+    // to remember an address must not block a payment that is ready to go.
+    if (userId) {
+      try {
+        await saveProfile(userId, address);
+      } catch (error) {
+        console.error('[order] Failed to save profile address:', error);
+      }
+    }
+
     res.status(200).json({ success: true, order });
   } catch (error) {
     console.error('Error creating order:', error);
@@ -236,6 +270,8 @@ router.post('/verify', paymentLimiter, async (req, res) => {
       .digest('hex');
 
     if (expectedSignature === razorpay_signature) {
+      await markOrderPaid(razorpay_order_id, razorpay_payment_id);
+
       // Payment successful! Normally the order notification email is sent
       // from the /webhook handler below, since that's reliable even if the
       // customer closes the tab. But until RAZORPAY_WEBHOOK_SECRET is set up
@@ -299,6 +335,8 @@ router.post('/webhook', async (req, res) => {
     if (req.body?.event === 'payment.captured') {
       const payment = req.body?.payload?.payment?.entity;
       if (payment?.order_id) {
+        await markOrderPaid(payment.order_id, payment.id);
+
         const order = await getRazorpay().orders.fetch(payment.order_id);
         const notes = order.notes as Record<string, string | number> | undefined;
         await sendOrderNotificationEmail({

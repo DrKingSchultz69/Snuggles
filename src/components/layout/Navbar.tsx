@@ -1,5 +1,6 @@
 import { Search, ShoppingBag, User } from 'lucide-react';
 import { Link } from 'react-router';
+import { SignedIn, SignedOut, SignInButton, UserButton } from '@clerk/clerk-react';
 import { useCart } from '../../context/CartContext';
 import { useSearch } from '../../context/SearchContext';
 import { formatPrice } from '../../lib/utils';
@@ -44,9 +45,28 @@ const Navbar = () => {
           >
             <Search className="w-5 h-5 stroke-1" />
           </button>
-          <button className="p-2 hover:bg-muted rounded-full transition-colors hidden md:block" aria-label="Account">
-            <User className="w-5 h-5 stroke-1" />
-          </button>
+          <SignedOut>
+            <SignInButton mode="modal">
+              <button
+                className="p-2 hover:bg-muted rounded-full transition-colors hidden md:block"
+                aria-label="Sign in"
+              >
+                <User className="w-5 h-5 stroke-1" />
+              </button>
+            </SignInButton>
+          </SignedOut>
+          <SignedIn>
+            <Link
+              to="/account"
+              className="p-2 hover:bg-muted rounded-full transition-colors hidden md:block"
+              aria-label="My account"
+            >
+              <User className="w-5 h-5 stroke-1" />
+            </Link>
+            <div className="hidden md:flex items-center">
+              <UserButton afterSignOutUrl="/" />
+            </div>
+          </SignedIn>
           
           {/* Cart with Mini Summary */}
           <div className="relative group z-50">

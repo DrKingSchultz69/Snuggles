@@ -1,6 +1,23 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
+import { useAuth } from '@clerk/clerk-react';
 import type { CartItem } from '../context/CartContext';
 import type { ShippingAddress } from './AddressForm';
+
+interface RazorpayPaymentResponse {
+  razorpay_order_id: string;
+  razorpay_payment_id: string;
+  razorpay_signature: string;
+}
+
+interface RazorpayInstance {
+  open: () => void;
+}
+
+declare global {
+  interface Window {
+    Razorpay: new (options: Record<string, unknown>) => RazorpayInstance;
+  }
+}
 
 // Dynamically load the Razorpay script
 const loadRazorpayScript = () => {
@@ -23,6 +40,7 @@ export const RazorpayButton = ({
   address: ShippingAddress;
 }) => {
   const [loading, setLoading] = useState(false);
+  const { getToken } = useAuth();
 
   const handlePayment = async () => {
     setLoading(true);
@@ -37,9 +55,16 @@ export const RazorpayButton = ({
     try {
       // Create Order on your backend. The server looks up real prices from Shopify
       // using these variant IDs — it never trusts a price/amount from the client.
+      // Sent when signed in so the server can attach the order to the account
+      // and remember the address. Guests simply send no token.
+      const token = await getToken();
+
       const orderRes = await fetch('/api/payment/create-order', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Content-Type': 'application/json',
+          ...(token ? { Authorization: `Bearer ${token}` } : {}),
+        },
         body: JSON.stringify({
           items: items.map((item) => ({
             variantId: item.variantId,
@@ -69,7 +94,7 @@ export const RazorpayButton = ({
         name: 'Snuggles',
         description: 'Transaction',
         order_id: order.id,
-        handler: async (response: any) => {
+        handler: async (response: RazorpayPaymentResponse) => {
           // Verify Payment on your backend
           const verifyRes = await fetch('/api/payment/verify', {
             method: 'POST',
@@ -94,7 +119,7 @@ export const RazorpayButton = ({
         },
       };
 
-      const paymentObject = new (window as any).Razorpay(options);
+      const paymentObject = new window.Razorpay(options);
       paymentObject.open();
     } catch (error) {
       console.error(error);
